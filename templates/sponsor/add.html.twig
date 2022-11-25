@@ -136,6 +136,8 @@
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <tbody>
+                                    {% form_theme form 'foundation_5_layout.html.twig' %}
+
                                     {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
                                     <table>
                                         <tr>

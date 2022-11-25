@@ -19,7 +19,7 @@ class SponsorType extends AbstractType
             ->add('montant_donnee')
             ->add('type_sponsoring')
           //  ->add('evenements')
-          ->add('submit',SubmitType::class)
+          ->add('submit',SubmitType::class, ['label' => 'Enregistrer'])
 
         ;
     }
