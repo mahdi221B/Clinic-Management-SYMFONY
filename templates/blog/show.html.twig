@@ -1,0 +1,51 @@
+{%extends 'blog/base.html.twig' %}
+
+{% block body %}
+
+    <post>
+        <h2>{{ posts.title }}  </h2>
+        <div class="metadata">Ecrite le {{ posts.datepost }} dans la catégorie {{ posts.categorie.title}} </div>
+        <div class="content">
+            <img src="{{ posts.image }}" alt= "">
+            <br>
+         {{ posts.text }}
+
+        </div>
+
+    </post>
+    <section id="commentaires">
+        <h1>  {{ posts.Commentaires|length }} Commentaires :</h1>
+        {% for commentaire in posts.commentaires %}
+        <div class="commentaire">
+
+            <div class="row">
+                <div class="col-3">
+
+                    {{ commentaire.autheur }} (<small>
+                        {{ commentaire.date }}
+
+                    </small>
+                </div>
+                <div class="col">
+                    {{ commentaire.text |raw }}
+                </div>
+            </div>
+        </div>
+
+
+        {% endfor %}
+
+        {{ form_start(CommentaireForm) }}
+
+
+
+        {{ form_row(CommentaireForm.autheur, {'attr': {'placeholder': "Votre nom"}}) }}
+
+        {{ form_row(CommentaireForm.text,{'attr': {'placeholder': "Votre Commentaire"}}) }}
+
+        <button type="submit" class="btn btn-success"> Leave a comment  </button>
+        {{ form_end(CommentaireForm)}}
+    </section>
+
+
+{% endblock %}

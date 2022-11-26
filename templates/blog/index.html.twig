@@ -1,0 +1,30 @@
+{%extends 'blog/base.html.twig' %}
+
+
+
+{% block title  %} Hello {{ controller_name }} ! {% endblock %}
+
+
+{% block body %}
+
+{%for i in posts %}
+    <section class ="post">
+        <post>
+            <h2>{{ i.title}} </h2>
+            <div class="metadata">Ecrite le {{ i.datepost}}a 19:00 dans la catégorie Politique </div>
+            <div class="content">
+                <img src="{{ i.image }}" alt= "">
+
+                </p>
+               {{ i.text }}
+                <a href ="{{ path('blog_show',{'id':i.id}) }}" class=" btn btn-primary"> lire la suite</a>
+            </div>
+
+        </post>
+
+
+{% endfor %}
+
+    </section>
+
+{% endblock %}
