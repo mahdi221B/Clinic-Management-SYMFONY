@@ -38,6 +38,9 @@
             "./migrations/.gitignore"
         ]
     },
+    "endroid/qr-code-bundle": {
+        "version": "4.1.1"
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {
@@ -147,6 +150,27 @@
             "branch": "main",
             "version": "1.0",
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
+    "symfony/mercure-bundle": {
+        "version": "0.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "0.3",
+            "ref": "7c7e63c36530052a174f28a6be4e451c4709be83"
+        },
+        "files": [
+            "./config/packages/mercure.yaml"
+        ]
+    },
+    "symfony/mercure-notifier": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "ae4620ee823a67e41f65aabec525fa52c79a8b09"
         }
     },
     "symfony/messenger": {
@@ -265,6 +289,9 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/ux-notify": {
+        "version": "v2.5.0"
+    },
     "symfony/validator": {
         "version": "5.4",
         "recipe": {
@@ -300,6 +327,25 @@
         },
         "files": [
             "./config/packages/messenger.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "1.16",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.10",
+            "ref": "5878c7c28468ca0fdce2497a04cfc66bab0dc3ef"
+        },
+        "files": [
+            "./assets/app.js",
+            "./assets/bootstrap.js",
+            "./assets/controllers.json",
+            "./assets/controllers/hello_controller.js",
+            "./assets/styles/app.css",
+            "./config/packages/webpack_encore.yaml",
+            "./package.json",
+            "./webpack.config.js"
         ]
     },
     "twig/extra-bundle": {

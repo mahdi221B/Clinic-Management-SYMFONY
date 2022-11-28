@@ -19,6 +19,8 @@
     <link href="{{asset('back-office/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{asset('back-office/assets/css/soft-ui-dashboard.css?v=1.0.6')}}" rel="stylesheet" />
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('notyf') }}
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -227,7 +229,9 @@
 
 
 
-{% block main %}{% endblock %}
+{% block main %}
+    {% include '/test/_notyf.html.twig' %}
+{% endblock %}
 
 
 
@@ -476,6 +480,8 @@
         },
     });
 </script>
+{{ encore_entry_script_tags('app') }}
+{{ encore_entry_script_tags('notyf') }}
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Repository\EvenementRepository;
 use App\Repository\SponsorRepository;
+use App\service\QrcodeService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,12 @@ class FrontOfficeController extends AbstractController
         ));
     }
 
+    #[Route('/map', name: 'mapmap')]
+    public function map()
+    {
+        return $this->render('sponsor/detaille.html.twig');
+    }
+
     #[Route('/frontspon', name: 'app_front_spon')]
     public function frontspon(SponsorRepository $sponsorRepository)
     {
@@ -43,5 +50,22 @@ class FrontOfficeController extends AbstractController
         return $this->render('back-office/dashbord.html.twig',array('totalDon'=>$totalDon,
             'topEve'=>$topEve
             ));
+    }
+    #[Route('/qrcode/{id}', name: 'app_qr_test')]
+    public function qrcode($id,QrcodeService $qrcodeService)
+    {
+        $qrCode = null;
+        $qrCode = $qrcodeService->qrcode($id);
+        return $this->render('sponsor/detaille.html.twig', array(
+            'qrCode' => $qrCode,
+        ));
+
+    }
+
+    #[Route('/meet', name: 'app_meet')]
+    public function meet()
+    {
+        return $this->render('meet.html.twig');
+
     }
 }

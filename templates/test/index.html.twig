@@ -1,0 +1,20 @@
+{% extends '/test/base.html.twig' %}
+{% block title %}Notyf 🚀{% endblock %}
+
+{% block body %}
+    <nav>
+        <ul>
+            <li>
+                <strong>Notyf 🚀</strong>
+            </li>
+        </ul>
+        <ul>
+            <li><a href="{{ path('app_notyf') }}" role="button">Success</a></li>
+            <li><a href="{{ path('app_notyf') }}" role="button">Info</a></li>
+            <li><a href="{{ path('app_notyf') }}" role="button">Warning</a></li>
+            <li><a href="{{ path('app_notyf') }}" role="button">Error</a></li>
+        </ul>
+    </nav>
+
+
+{% endblock %}

@@ -5,12 +5,17 @@ namespace App\Controller;
 use App\Entity\Sponsor;
 use App\Form\SponsorType;
 use App\Repository\SponsorRepository;
+use App\service\PdfService;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 #[Route('/sponsor')]
 class SponsorController extends AbstractController
@@ -25,7 +30,7 @@ class SponsorController extends AbstractController
     }
 
     #[Route('/new', name: 'app_sponsor_new')]
-    public function new(Request $request,ManagerRegistry $managerRegistry,MailerInterface $mailer, SponsorRepository $sponsorRepository)
+    public function new(Request $request,ManagerRegistry $managerRegistry,MailerInterface $mailer,PdfService $pdfService, SponsorRepository $sponsorRepository)
     {
         $sponsor = new Sponsor();
         $form = $this->createForm(SponsorType::class, $sponsor);
@@ -48,7 +53,11 @@ class SponsorController extends AbstractController
             $mailer->send($email);
 
 
+            //$this->addFlash('success', 'Sponsor ajouté avec succ');
+
+
             return $this->redirectToRoute('app_sponsor_index');
+
         }
         return $this->renderForm('sponsor/add.html.twig',array(
             'sponsor' => $sponsor,
@@ -67,11 +76,15 @@ class SponsorController extends AbstractController
     }
 
     #[Route('/detailSpon/{id}', name: 'app_spon_detail')]
-    public function detailespon($id,SponsorRepository $Repository)
+    public function detailespon($id,SponsorRepository $Repository,PdfService $pdfService)
     {
-        return $this->render('sponsor/show.html.twig',array(
+        $html = $this->render('sponsor/show.html.twig',array(
             'i' => $Repository->find($id)
         ));
+        $pdfService->showPdfFile($html);
+        return $html;
+
+
     }
 
     #[Route('/updatesponsor/{id}', name: 'update_sponsor')]
@@ -90,4 +103,5 @@ class SponsorController extends AbstractController
             'form' => $form
         ));
     }
+
 }
