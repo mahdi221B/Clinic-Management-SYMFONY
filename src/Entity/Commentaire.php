@@ -78,4 +78,10 @@ class Commentaire
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getAutheur();
+    }
+
 }

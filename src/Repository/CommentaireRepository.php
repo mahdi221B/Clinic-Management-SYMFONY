@@ -66,7 +66,17 @@ class CommentaireRepository extends ServiceEntityRepository
     public function topfan()
     {
         $qb = $this->createQueryBuilder('e')
-            ->orderBy('e.autheur', 'DESC')
+            ->orderBy('COUNT(e.autheur)','DESC')
+            ->groupBy('e.autheur')
+            ->setMaxResults(1);
+        return $qb->getQuery()
+            ->getSingleResult();
+    }
+    public function inactive()
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->orderBy('COUNT(e.autheur)','ASC')
+            ->groupBy('e.autheur')
             ->setMaxResults(1);
         return $qb->getQuery()
             ->getSingleResult();

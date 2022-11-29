@@ -2,6 +2,41 @@
 
 {% block body %}
 
+
+
+    <div>
+
+       <center><h2>Congratulations <strong>{{ topfan.autheur }}</strong>
+              you are our top fan for this week <html>
+               <style>
+                   body {
+                       font-size: 20px;
+                   }
+               </style>
+               <body>
+
+               <span style='font-size:100px;'>&#127942;</span>
+
+               </body>
+               </html></h2></center>
+
+
+        <center><h2>It's been a while no see <strong>{{ inactive.autheur }}</strong>
+                We really miss your comments <style>
+                    body {
+                        font-size: 20px;
+                    }
+                </style>
+                <body>
+
+                <span style='font-size:100px;'>&#128557;</span></h2></center>
+
+
+
+
+    </div>
+
+
     <post>
         <h2>{{ posts.title }}  </h2>
         <div class="metadata">Ecrite le {{ posts.datepost }} dans la catégorie {{ posts.categorie.title}} </div>
@@ -18,11 +53,12 @@
         {% for commentaire in posts.commentaires %}
         <div class="commentaire">
 
+
             <div class="row">
                 <div class="col-3">
 
-                    {{ commentaire.autheur }} (<small>
-                        {{ commentaire.date }}
+                    {{ commentaire.autheur }} <br>(<small>
+                        {{ commentaire.date }})
 
                     </small>
                 </div>
@@ -31,7 +67,6 @@
                 </div>
             </div>
         </div>
-
 
         {% endfor %}
 
@@ -46,6 +81,7 @@
         <button type="submit" class="btn btn-success"> Leave a comment  </button>
         {{ form_end(CommentaireForm)}}
     </section>
+
 
 
 {% endblock %}

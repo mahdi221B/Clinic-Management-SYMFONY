@@ -10,17 +10,24 @@ use App\Repository\CommentaireRepository;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class BlogController extends AbstractController
 {
     #[Route('/blog', name: 'blog')]
-    public function index(PostRepository $repo): Response
+    public function index(Request $request,PostRepository $repo,PaginatorInterface $paginator): Response
     {
         $posts = $repo->findAll();
+        $posts = $paginator->paginate(
+            $posts, /* query NOT result */
+            $request->query->getInt('page', 1),
+            2
+        );
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
             'posts' => $posts
@@ -45,6 +52,8 @@ class BlogController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $managerRegistry->getManager();
+
+
             if(!$post->getId()){
             $post->setDatePost(date("d-m-Y- h-i-s  ", strtotime("now ")));
             }
@@ -62,16 +71,17 @@ class BlogController extends AbstractController
     }
 
     #[Route('/blog/{id}', name: 'blog_show')]
-    public function show(Post $posts,Request $request,ManagerRegistry $managerRegistry)
+    public function show(CommentaireRepository $commentaireRepository,Post $posts,Request $request,ManagerRegistry $managerRegistry)
     {
-
+        $topfan= $commentaireRepository->topfan();
+        $inactive= $commentaireRepository->inactive();
         $commentaire = new Commentaire();
         $form = $this->createForm( CommentaireType::class,$commentaire);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $managerRegistry->getManager();
-             $commentaire->setDate(date("d-m-Y- h-i-s  ", strtotime("now ")));
+             $commentaire->setDate(date("d-m-Y-  h-i-s       ", strtotime("now ")));
              $commentaire->setPost($posts);
             $em->persist($commentaire);
             $em->flush();
@@ -82,9 +92,12 @@ class BlogController extends AbstractController
 
         return $this->render('blog/show.html.twig',[
             'posts' => $posts,
+            'topfan' => $topfan,
+            'inactive' => $inactive,
             'CommentaireForm' =>$form->createView()
         ]);
     }
+
 
 
 }
