@@ -58,16 +58,18 @@ class Evenement
     #[Assert\NotBlank(message:"Champ vide")]
     private ?int $montant_recole = null;
 
-    #[ORM\ManyToMany(targetEntity: Sponsor::class, inversedBy: 'evenements')]
-    private Collection $sponsors;
 
     #[ORM\ManyToOne(inversedBy: 'evenements')]
     #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?TypeEvenement $typeEvenement = null;
 
+    #[ORM\OneToMany(mappedBy: 'listeevents', targetEntity: Donation::class, orphanRemoval: true)]
+    private Collection $donations;
+
     public function __construct()
     {
         $this->sponsors = new ArrayCollection();
+        $this->donations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,29 +185,6 @@ class Evenement
         return $this;
     }
 
-    /**
-     * @return Collection<int, Sponsor>
-     */
-    public function getSponsors(): Collection
-    {
-        return $this->sponsors;
-    }
-
-    public function addSponsor(Sponsor $sponsor): self
-    {
-        if (!$this->sponsors->contains($sponsor)) {
-            $this->sponsors->add($sponsor);
-        }
-
-        return $this;
-    }
-
-    public function removeSponsor(Sponsor $sponsor): self
-    {
-        $this->sponsors->removeElement($sponsor);
-
-        return $this;
-    }
 
     public function getTypeEvenement(): ?TypeEvenement
     {
@@ -215,6 +194,36 @@ class Evenement
     public function setTypeEvenement(?TypeEvenement $typeEvenement): self
     {
         $this->typeEvenement = $typeEvenement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Donation>
+     */
+    public function getDonations(): Collection
+    {
+        return $this->donations;
+    }
+
+    public function addDonation(Donation $donation): self
+    {
+        if (!$this->donations->contains($donation)) {
+            $this->donations->add($donation);
+            $donation->setListeevents($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDonation(Donation $donation): self
+    {
+        if ($this->donations->removeElement($donation)) {
+            // set the owning side to null (unless already changed)
+            if ($donation->getListeevents() === $this) {
+                $donation->setListeevents(null);
+            }
+        }
 
         return $this;
     }

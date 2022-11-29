@@ -69,7 +69,12 @@ class EvenementRepository extends ServiceEntityRepository
         $qb=$em->createQuery("SELECT SUM(E.montant_recole) FROM APP\Entity\Evenement E");
         return $qb->getSingleScalarResult();
     }
-
+    public function getDon($id){
+        $em=$this->getEntityManager();
+        $qb=$em->createQuery("SELECT E.montant_recole FROM APP\Entity\Evenement E where E.id = :x")
+            ->setParameter('x',$id);
+        return $qb->getSingleScalarResult();
+    }
 
     public function gettopDonName() {
         $qb=  $this->createQueryBuilder('e')

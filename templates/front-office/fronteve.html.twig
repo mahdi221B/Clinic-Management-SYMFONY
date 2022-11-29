@@ -123,7 +123,7 @@
                 <div class="card2">
                     <ul>
                         <li>
-                            <a href="{{path('update_evenement',{'id':i.id}) }}" ><i class="fa-solid fa-mug-hot"></i></a>
+                            <a href="{{path('app_donation',{'id':i.id}) }}" ><i class="fa-solid fa-money-bill"></i></a>
                         </li>
                         <li>
                             <a href="{{path('app_qr_test',{'id':i.lieu}) }}" ><i class="fa-solid fa-qrcode"></i></a>
@@ -143,6 +143,7 @@
                             labore laborum necessitatibus quis, earum, repellat facilis adipisci,
                             dolores corporis ipsam ratione eaque vitae quia sunt nemo et
                             repudiandae porro incidunt.
+                            {{ i.description }}
                             <button>See more...</button>
                         </p>
                     </div>

@@ -37,12 +37,12 @@ class Sponsor
     #[ORM\Column(length: 255)]
     private ?string $type_sponsoring = null;
 
-    #[ORM\ManyToMany(targetEntity: Evenement::class, mappedBy: 'sponsors')]
-    private Collection $evenements;
+    #[ORM\OneToMany(mappedBy: 'listesponsors', targetEntity: Donation::class, orphanRemoval: true)]
+    private Collection $donations;
 
     public function __construct()
     {
-        $this->evenements = new ArrayCollection();
+        $this->donations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,29 +111,33 @@ class Sponsor
     }
 
     /**
-     * @return Collection<int, Evenement>
+     * @return Collection<int, Donation>
      */
-    public function getEvenements(): Collection
+    public function getDonations(): Collection
     {
-        return $this->evenements;
+        return $this->donations;
     }
 
-    public function addEvenement(Evenement $evenement): self
+    public function addDonation(Donation $donation): self
     {
-        if (!$this->evenements->contains($evenement)) {
-            $this->evenements->add($evenement);
-            $evenement->addSponsor($this);
+        if (!$this->donations->contains($donation)) {
+            $this->donations->add($donation);
+            $donation->setListesponsors($this);
         }
 
         return $this;
     }
 
-    public function removeEvenement(Evenement $evenement): self
+    public function removeDonation(Donation $donation): self
     {
-        if ($this->evenements->removeElement($evenement)) {
-            $evenement->removeSponsor($this);
+        if ($this->donations->removeElement($donation)) {
+            // set the owning side to null (unless already changed)
+            if ($donation->getListesponsors() === $this) {
+                $donation->setListesponsors(null);
+            }
         }
 
         return $this;
     }
+
 }

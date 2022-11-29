@@ -51,11 +51,7 @@ class SponsorController extends AbstractController
                 ->text('Sending emails is fun again!')
                 ->html($sponsor->getTypeSponsoring());
             $mailer->send($email);
-
-
             //$this->addFlash('success', 'Sponsor ajouté avec succ');
-
-
             return $this->redirectToRoute('app_sponsor_index');
 
         }
