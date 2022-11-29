@@ -151,6 +151,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     {% for i in commande   %}
                                         <tr>
 
@@ -176,6 +177,8 @@
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-s font-weight-bold">{{ i.prixC }}</span>
                                             </td>
+
+
                                             <td class="align-middle text-center">
 
                                                 <a class="btn btn-outline-success    btn-sm mb-0 me-3"  href="{{ path('confirm_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">valider commande</a>
@@ -194,7 +197,20 @@
 
                                     </tbody>
                                 </table>
+                                <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder "> budget totale </th>
 
+                                {% for c in budget  %}
+                                    <tr>
+
+                                        <td class="align-middle text-center">
+                                            <span class="text-secondary text-s font-weight-bold">{{ c.Montant }}</span>
+                                        </td>
+
+
+
+                                    </tr>
+
+                                {% endfor %}
                             </div>
                         </div>
                     </div>

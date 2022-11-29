@@ -98,6 +98,11 @@ class ArticlesController extends AbstractController
            $em->flush();
            return $this->redirectToRoute("list_article");
        }
+       else{
+
+           return $this->renderForm('articles/error.html.twig');
+
+       }
 
         }
         return $this->renderForm('articles/retier.html.twig',array(
