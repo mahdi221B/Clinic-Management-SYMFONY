@@ -11,16 +11,268 @@
 
 
 {%for i in posts %}
-    <section class ="post">
-        <post>
-            <h2>{{ i.title}} </h2>
-            <div class="content">
-                <img src="{{ i.image }}" alt= "">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <!-- Code by Angela Delise
+       https://codepen.io/angeladelise/pen/Bajdvav
+      -->
 
-                </p>
-               {{ i.text }}
-                <a href ="{{ path('blog_show',{'id':i.id}) }}" class=" btn btn-primary"> lire la suite</a>
+    </head>
+
+    <body>
+
+    <div class="wrapper">
+        <div class="card">
+            <div class="card-banner">
+                <p class="category-tag popular">Popular</p>
+                <img class="banner-img" src="{{ i.image }}" alt= "">
             </div>
+
+
+
+
+
+            <div class="card-body">
+
+                <p class="blog-hashtag">#webdevelopment #frontend</p>
+                <h2 class="blog-title">{{ i.title}}</h2>
+                <p class="blog-description">{{ i.Text }}</p>
+
+                <div class="card-profile">
+                    <a href ="{{ path('blog_show',{'id':i.id}) }}" class=" btn btn-primary"> lire la suite</a>
+                    <!DOCTYPE html>
+                    <html lang="en">
+
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>note</title>
+                        <style>
+                            .star {
+                                font-size: 1.5rem;
+                            }
+
+                            .hover {
+                                color: rgb(255, 196, 0);
+                            }
+                        </style>
+                    </head>
+
+                    <body>
+
+                    <i class="star" data-note="1">&#9733;</i>
+                    <i class="star" data-note="2">&#9733;</i>
+                    <i class="star" data-note="3">&#9733;</i>
+                    <i class="star" data-note="4">&#9733;</i>
+                    <i class="star" data-note="5">&#9733;</i>
+                    <i class="note">Note:</i>
+                    <script>
+                        const stars = document.querySelectorAll('.star');
+                        let check = false;
+                        stars.forEach(star => {
+                            star.addEventListener('mouseover', selectStars);
+                            star.addEventListener('mouseleave', unselectStars);
+                            star.addEventListener('click', activeSelect);
+                        })
+
+                        function selectStars(e) {
+                            const data = e.target;
+                            const etoiles = priviousSiblings(data);
+                            if (!check) {
+                                etoiles.forEach(etoile => {
+                                    etoile.classList.add('hover');
+                                })
+                            }
+
+                        }
+
+                        function unselectStars(e) {
+                            const data = e.target;
+                            const etoiles = priviousSiblings(data);
+                            if (!check) {
+                                etoiles.forEach(etoile => {
+                                    etoile.classList.remove('hover');
+                                })
+                            }
+                        }
+
+                        function activeSelect(e) {
+                            if (!check) {
+                                check = true;
+                                document.querySelector('.note').innerHTML = 'Note ' + e.target.dataset.note;
+                            }
+                        }
+
+                        function priviousSiblings(data) {
+                            let values = [data];
+                            while (data = data.previousSibling) {
+                                if (data.nodeName === 'I') {
+                                    values.push(data);
+                                }
+                            }
+                            return values;
+                        }
+                    </script>
+
+                    </body>
+
+                    </html>
+
+
+                </div>
+            </div>
+        </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </body>
+
+
+
+
+
+
+
+
+
+    <style>
+        :root {
+            --clr-gray-light: #d7dfe2;
+            --clr-gray-med: #616b74;
+            --clr-gray-dark: #414b56;
+            --clr-link: #4d97b2;
+            --clr-popular: #ef257a;
+            --clr-technology: #651fff;
+            --clr-psychology: #e85808;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 2rem;
+            color: var(--clr-gray-dark);
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            overflow: hidden;
+            box-shadow: 0px 2px 20px var(--clr-gray-light);
+            background: white;
+            border-radius: 0.5rem;
+            position: relative;
+            width: 350px;
+            margin: 1rem;
+            transition: 250ms all ease-in-out;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 2px 40px var(--clr-gray-light);
+        }
+
+        .banner-img {
+            position: absolute;
+            object-fit: cover;
+            height: 14rem;
+            width: 100%;
+        }
+
+        .category-tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            background: red;
+            padding: 0.5rem 1.3rem 0.5rem 1rem;
+            text-transform: uppercase;
+            position: absolute;
+            z-index: 1;
+            top: 1rem;
+            border-radius: 0 2rem 2rem 0;
+        }
+
+        .popular {
+            background: var(--clr-popular);
+        }
+
+        .technology {
+            background: var(--clr-technology);
+        }
+
+        .psychology {
+            background: var(--clr-psychology);
+        }
+
+        .card-body {
+            margin: 15rem 1rem 1rem 1rem;
+        }
+
+        .blog-hashtag {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--clr-link);
+        }
+
+        .blog-title {
+            line-height: 1.5rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .blog-description {
+            color: var(--clr-gray-med);
+            font-size: 0.9rem;
+        }
+
+        .card-profile {
+            display: flex;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .card-profile-info {
+            margin-left: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1rem;
+        }
+
+        .profile-followers {
+            color: var(--clr-gray-med);
+            font-size: 0.9rem;
+        }
+
+    </style>
+
+
 
 
         </post>
@@ -114,84 +366,10 @@
 
 
 
-    <!DOCTYPE html>
-    <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>note</title>
-        <style>
-            .star {
-                font-size: 1.5rem;
-            }
 
-            .hover {
-                color: rgb(255, 196, 0);
-            }
-        </style>
-    </head>
 
-    <body>
 
-    <i class="star" data-note="1">&#9733;</i>
-    <i class="star" data-note="2">&#9733;</i>
-    <i class="star" data-note="3">&#9733;</i>
-    <i class="star" data-note="4">&#9733;</i>
-    <i class="star" data-note="5">&#9733;</i>
-    <i class="note">Note:</i>
-    <script>
-        const stars = document.querySelectorAll('.star');
-        let check = false;
-        stars.forEach(star => {
-            star.addEventListener('mouseover', selectStars);
-            star.addEventListener('mouseleave', unselectStars);
-            star.addEventListener('click', activeSelect);
-        })
-
-        function selectStars(e) {
-            const data = e.target;
-            const etoiles = priviousSiblings(data);
-            if (!check) {
-                etoiles.forEach(etoile => {
-                    etoile.classList.add('hover');
-                })
-            }
-
-        }
-
-        function unselectStars(e) {
-            const data = e.target;
-            const etoiles = priviousSiblings(data);
-            if (!check) {
-                etoiles.forEach(etoile => {
-                    etoile.classList.remove('hover');
-                })
-            }
-        }
-
-        function activeSelect(e) {
-            if (!check) {
-                check = true;
-                document.querySelector('.note').innerHTML = 'Note ' + e.target.dataset.note;
-            }
-        }
-
-        function priviousSiblings(data) {
-            let values = [data];
-            while (data = data.previousSibling) {
-                if (data.nodeName === 'I') {
-                    values.push(data);
-                }
-            }
-            return values;
-        }
-    </script>
-
-    </body>
-
-    </html>
 
 {% endfor %}
 
