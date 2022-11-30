@@ -69,13 +69,13 @@ class CommandeRepository extends ServiceEntityRepository
 
     public function sendsms(): void
     {
-        $sid = "ACff096b193c1c973816cf724a9c445180" ; //getenv("AC2420083fb29a62edd5f592cfa12ac98f");
-        $token = "1a05dcecbf89f071055d9ea6131946c7" ; //getenv("c2daf4ab58d08620521e2471488640f5");
+        $sid = "ACff096b193c1c973816cf724a9c445180" ;
+        $token = "1a05dcecbf89f071055d9ea6131946c7" ;
         $client = new Client ($sid, $token);
 
         $message = $client->messages
             ->create("+21654583665", // to
-                ["body" => "  l commande est validé 3asba, ija hez zok om l article nayek ", "from" => "+18654247150"]
+                ["body" => "  l commande est validé , ", "from" => "+18654247150"]
             );
 
     }

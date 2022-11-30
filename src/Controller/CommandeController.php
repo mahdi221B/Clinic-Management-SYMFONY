@@ -47,22 +47,14 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
     return $this->renderForm('commande/addc.html.twig',array(
     'commande'=> $commande,
     'form'=>$form
-
 )
-
-
     ) ;
-
-
-    }
+}
     #[Route('/confirm/{id}', name: 'confirm_commande')]
     public function confirm($id ,Request $request,ManagerRegistry $managerRegistry ,CommandeRepository $CommandeRepository , ArticlesRepository $ArticlesRepository ,BudgetRepository $BudgetRepository)
     {
-
         $commande = $CommandeRepository->find($id);
         $budget =  $BudgetRepository->findOneBy(['id'=> '1' ]);
-
-
         $newFormat=date("d-m-Y",strtotime("now"));
         $commande->getArticles()->setQte($commande->getQteC()+$commande->getArticles()->getQte());
         $commande->setDateCloture($newFormat);
@@ -75,10 +67,6 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $em->flush();
         //$CommandeRepository->sendsms();
         return $this->redirectToRoute("list_commande");
-
-
-
-
     }
 
 
@@ -129,14 +117,14 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
 //find all comandes
             // select commande whre  date-cloture is between tab[date1] and tab (date 2 and  where statut %like validé]
             $tab = $form->getData() ;
-            //$qte = (string)$tab["field_name"] ;
+            $qte = (string)$tab["field_name"] ;
             var_dump($tab['date1']  ) ;
             var_dump($tab['date2']  ) ;
             $result = $tab['date1'] ->format('Y-m-d ');
             var_dump($result);
 
 
-            die() ;
+
                 return $this->redirectToRoute("list_article");
 
             }

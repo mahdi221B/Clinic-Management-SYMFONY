@@ -1,6 +1,5 @@
 {% extends 'back-office/index-back.html.twig' %}
 {% block main %}
-
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
@@ -130,60 +129,55 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0">
 
-                            <h6>Table des Aarticles </h6>
+                            <h6>Table des Commande </h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
-                                <table class="table table-striped table-bordered" style="width:100%">
+                                <table class="table align-items-center mb-0">
                                     <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">nom</th>
-                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7   " >description</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">type</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">quantité</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">prix </th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">aquidestine</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">update</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-100">Qte</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder  ps-2">statut</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">date ajout</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">date cloture</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">motif cloture </th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">nom articles</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">prix totale</th>
+
+
 
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for i in articles   %}
+
+                                    {% for i in commande   %}
                                         <tr>
 
 
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.nomarticles }}</span>
-                                            </td>
-                                            <td >
-                                                <span class="text-secondary text-s font-weight-bold ">{{ i.description }}
-
-                                                </span>
+                                                <span class="text-secondary text-s font-weight-bold">{{ i.QteC }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.type  }}</span>
+                                                <span class="text-secondary text-s font-weight-bold">{{ i.status }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.qte }}</span>
+                                                <span class="text-secondary text-s font-weight-bold">{{ i.dateajout  }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.prix }}</span>
+                                                <span class="text-secondary text-s font-weight-bold">{{ i.datecloture }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.aquidestine }}</span>
+                                                <span class="text-secondary text-s font-weight-bold">{{ i.motifcloture }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{path('update_articles',{'id' :i.id}  ) }}">update</a>
-                                                {#<a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{path('article_delete',{'id' :i.id}  ) }}">update</a><#}
-                                                <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{path('new_commande',{'id' :i.id}) }}">commande</a>
-                                                <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{path('retirer',{'id' :i.id}) }}">retirer</a>
-                                                <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{ path('touslescommande',{'id' :i.id}) }}">tous les comande</a>
-
-
-
-
+                                                <span class="text-secondary text-s font-weight-bold">{{ i.Articles.nomarticles }}</span>
                                             </td>
+                                            <td class="align-middle text-center">
+                                                <span class="text-secondary text-s font-weight-bold">{{ i.prixC }}</span>
+                                            </td>
+
+
 
 
                                         </tr>
@@ -192,8 +186,6 @@
 
                                     </tbody>
                                 </table>
-
-                                <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{ path('article_new') }}">ajouter article</a>
 
 
                             </div>

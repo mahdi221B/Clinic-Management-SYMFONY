@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Articles;
 use App\Form\ArticlesType;
+use App\Form\CommandesArticlesType;
 use App\Form\RetirerArticleType;
 use App\Form\UpdatearticleType;
 use App\Repository\ArticlesRepository;
@@ -75,35 +76,41 @@ class ArticlesController extends AbstractController
     }
 
 
+    #[Route('/allcommande/{id}', name: 'touslescommande')]
+    public function touscommande($id, Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository)
+    {
+        $Article = $ArticlesRepository->find($id);
+        $commandes= $Article->getCommandelist();
+        //$form = $this->createForm(CommandesArticlesType::class,null );
+        //$form ->handleRequest($request);
+        //if ($form->isSubmitted()   ) {}
+                return $this->renderForm('Articles/allcomandes.html.twig',array(
+                'article' => $Article,
+                'commande'=>$commandes,
+                //'form' => $form
+            ));
+
+    }
+
     #[Route('/retirerarticle/{id}', name: 'retirer')]
     public function retirer($id, Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository)
     {
         $Article = $ArticlesRepository->find($id);
-
         $form = $this->createForm(RetirerArticleType::class, null );
         $form ->handleRequest($request);
         if ($form->isSubmitted()   ) {
-
-
        $tab = $form->getData() ;
        $qte = (int)$tab["qtearetirer"] ;
        if ($qte < $Article->getQte()) {
-
-           //var_dump($qte) ;
-           //     die() ;
            $Article->setQte($Article->getQte() - $qte);
            $em = $managerRegistry->getManager();
-
            $em->persist($Article);
            $em->flush();
            return $this->redirectToRoute("list_article");
        }
        else{
-
            return $this->renderForm('articles/error.html.twig');
-
        }
-
         }
         return $this->renderForm('articles/retier.html.twig',array(
             'Articles'=> $Article,
