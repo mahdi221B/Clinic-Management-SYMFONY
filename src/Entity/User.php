@@ -97,6 +97,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $enabled = true;
 
+    #[ORM\Column(length: 255)]
+    private ?string $reset_token = null;
+
+
 
     public function __construct()
     {
@@ -280,4 +284,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // see section on salt below
         return null;
     }
+
+    public function getResetToken(): ?string
+    {
+        return $this->reset_token;
+    }
+
+    public function setResetToken(string $reset_token): self
+    {
+        $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
+
+
 }
