@@ -89,13 +89,15 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $em = $managerRegistry->getManager();
         $em -> persist($commande);
         $em->flush();
+        //$CommandeRepository->sendsms2();
+
         return $this->redirectToRoute("list_commande");
 
 
     }
 
     #[Route('/listcommande', name: 'list_commande')]
-    public function listeCommande(CommandeRepository  $repository ,BudgetRepository $BudgetRepository)
+    public function listeCommande(  CommandeRepository  $repository ,BudgetRepository $BudgetRepository)
     {
         $Commande= $repository->findAll();
         $budget =$BudgetRepository->findAll();

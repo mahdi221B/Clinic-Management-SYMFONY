@@ -75,7 +75,20 @@ class CommandeRepository extends ServiceEntityRepository
 
         $message = $client->messages
             ->create("+21654583665", // to
-                ["body" => "  l commande est validé , ", "from" => "+18654247150"]
+                ["body" => "  votre  commande est validé , ", "from" => "+18654247150"]
+            );
+
+    }
+
+    public function sendsms2(): void
+    {
+        $sid = "ACff096b193c1c973816cf724a9c445180" ;
+        $token = "1a05dcecbf89f071055d9ea6131946c7" ;
+        $client = new Client ($sid, $token);
+
+        $message = $client->messages
+            ->create("+21654583665", // to
+                ["body" => "  votre  commande est refusé  , ", "from" => "+18654247150"]
             );
 
     }

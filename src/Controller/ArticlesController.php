@@ -83,24 +83,19 @@ class ArticlesController extends AbstractController
     {
         $Article = $ArticlesRepository->find($id);
         $commandes= $Article->getCommandelist() ;
-
+        $totalespent=0;
         $expr = new Comparison('status', '=', 'validee');
-
         $criteria = new Criteria();
-
         $criteria->where($expr);
+        $commandevalide = $commandes->matching($criteria);
+                foreach ($commandevalide as $cle => $valeur) {
+            $totale = $totalespent += $valeur->getPrixC();
+        }
 
-        $matchingCollection = $commandes->matching($criteria);
-
-
-
-
-        //$commandes= $ArticlesRepository->commandevalidepararticle($id);
-
-
-                return $this->renderForm('Articles/allcomandes.html.twig',array(
+                return $this->renderForm('Articles/allvalidecomandes.html.twig',array(
                 'article' => $Article,
-                'commande'=>$matchingCollection,
+                'commande'=>$commandevalide,
+                'totale'=>$totale,
                 //'form' => $form
             ));
 
