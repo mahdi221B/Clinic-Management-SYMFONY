@@ -88,6 +88,11 @@ class ArticlesController extends AbstractController
         $criteria = new Criteria();
         $criteria->where($expr);
         $commandevalide = $commandes->matching($criteria);
+        if(count($commandevalide) ==0  ){
+
+            return $this->renderForm('commande/listnonvalide.html.twig');
+
+        }else
                 foreach ($commandevalide as $cle => $valeur) {
             $totale = $totalespent += $valeur->getPrixC();
         }

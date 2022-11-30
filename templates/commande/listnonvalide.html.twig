@@ -152,65 +152,18 @@
                                     </thead>
                                     <tbody>
 
-                                    {% for i in commande   %}
-                                        <tr>
 
 
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.QteC }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.status }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.dateajout  }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.datecloture }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.motifcloture }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.Articles.nomarticles }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-s font-weight-bold">{{ i.prixC }}</span>
-                                            </td>
-
-
-                                            <td class="align-middle text-center">
-
-                                                <a class="btn btn-outline-success    btn-sm mb-0 me-3"  href="{{ path('confirm_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">valider commande</a>
-
-                                            </td>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <a class="btn btn-outline-danger    btn-sm mb-0 me-3"  href="{{ path('refuse_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">refuser commande</a>
-
-                                            </td>
-
-
-                                        </tr>
-
-                                    {% endfor %}
 
                                     </tbody>
                                 </table>
-                                &nbsp  &nbsp  &nbsp &nbsp &nbsp  <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder "> budget totale : </th>
+                                &nbsp  &nbsp  &nbsp &nbsp &nbsp  il n'ya pas de commande valide pour cet article
 
-                                {% for c in budget  %}
-                                    <tr>
-
-                                        <td class="align-middle text-center">
-                                           <span class="text-secondary text-s font-weight-bold">{{ c.Montant }}</span>
-                                        </td>
+                                <br>
+                                <br>
+                                <a class="btn btn-outline-info btn-sm mb-0 me-3"  href="{{ path('list_article') }}">liste des  articles</a>
 
 
-
-                                    </tr>
-
-                                {% endfor %}
                             </div>
                         </div>
                     </div>
