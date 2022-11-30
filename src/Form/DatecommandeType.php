@@ -18,11 +18,10 @@ class DatecommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            //->add('date1',DateType::class)
-            //->add('date2',DateType::class)
+            ->add('date1',DateType::class)
+            ->add('date2',DateType::class)
 
-// ->add('classroom')
-            ->add('article')
+            //->add('article')
 
             ->add("listecommande",SubmitType::class)
         ;

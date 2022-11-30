@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Controller;
-
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Expr\Comparison;
 use App\Entity\Articles;
 use App\Form\ArticlesType;
 use App\Form\CommandesArticlesType;
 use App\Form\RetirerArticleType;
 use App\Form\UpdatearticleType;
 use App\Repository\ArticlesRepository;
+use App\Repository\CommandeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,16 +79,28 @@ class ArticlesController extends AbstractController
 
 
     #[Route('/allcommande/{id}', name: 'touslescommande')]
-    public function touscommande($id, Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository)
+    public function touscommande($id, Request $request,ManagerRegistry $managerRegistry  ,CommandeRepository $CommandeRepository, ArticlesRepository $ArticlesRepository)
     {
         $Article = $ArticlesRepository->find($id);
-        $commandes= $Article->getCommandelist();
-        //$form = $this->createForm(CommandesArticlesType::class,null );
-        //$form ->handleRequest($request);
-        //if ($form->isSubmitted()   ) {}
+        $commandes= $Article->getCommandelist() ;
+
+        $expr = new Comparison('status', '=', 'validee');
+
+        $criteria = new Criteria();
+
+        $criteria->where($expr);
+
+        $matchingCollection = $commandes->matching($criteria);
+
+
+
+
+        //$commandes= $ArticlesRepository->commandevalidepararticle($id);
+
+
                 return $this->renderForm('Articles/allcomandes.html.twig',array(
                 'article' => $Article,
-                'commande'=>$commandes,
+                'commande'=>$matchingCollection,
                 //'form' => $form
             ));
 

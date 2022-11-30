@@ -80,4 +80,14 @@ class CommandeRepository extends ServiceEntityRepository
 
     }
 
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.status = :valideé')
+            ->setParameter('valideé', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }

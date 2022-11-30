@@ -58,7 +58,7 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $newFormat=date("d-m-Y",strtotime("now"));
         $commande->getArticles()->setQte($commande->getQteC()+$commande->getArticles()->getQte());
         $commande->setDateCloture($newFormat);
-        $commande->setStatus("valideé");
+        $commande->setStatus("validee");
         $commande->setDateCloture($newFormat);
         $commande->setMotifCloture("cloturé avec suceé");
         $budget->setMontant($budget->getMontant()-$commande->getPrixC() );
@@ -106,26 +106,37 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         );
     }
 
-    #[Route('/commandesbetween', name: 'between')]
-    public function between(Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository)
+    #[Route('/commandesbetween}', name: 'between')]
+    public function between($id,Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository,CommandeRepository $CommandeRepository )
     {
+        $Commande= $CommandeRepository ->findAll();
 
+         $date=strtotime(  $Commande->getDateCloture());
+         var_dump($date);
         $form = $this->createForm(DatecommandeType::class, null );
         $form ->handleRequest($request);
+
         if ($form->isSubmitted()   ) {
 
 //find all comandes
             // select commande whre  date-cloture is between tab[date1] and tab (date 2 and  where statut %like validé]
             $tab = $form->getData() ;
-            $qte = (string)$tab["field_name"] ;
-            var_dump($tab['date1']  ) ;
-            var_dump($tab['date2']  ) ;
-            $result = $tab['date1'] ->format('Y-m-d ');
-            var_dump($result);
+            //$qte = (string)$tab["field_name"] ;
+            var_dump($tab['date1'] ->format('Y-m-d ')  ) ;
+            var_dump($tab['date2'] ->format('Y-m-d ')  ) ;
 
 
+            //var_dump($tab['date2']  ) ;
+            //$result1 = $tab['date1'] ->format('Y-m-d ');
+            //$result2= $tab['date2'] ->format('Y-m-d ');
 
-                return $this->redirectToRoute("list_article");
+            //var_dump($result1);
+            //var_dump($result2);
+
+            die();
+
+
+//                return $this->redirectToRoute("list_article");
 
             }
 
