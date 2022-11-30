@@ -66,6 +66,9 @@ class Evenement
     #[ORM\OneToMany(mappedBy: 'listeevents', targetEntity: Donation::class, orphanRemoval: true)]
     private Collection $donations;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture = null;
+
     public function __construct()
     {
         $this->sponsors = new ArrayCollection();
@@ -224,6 +227,18 @@ class Evenement
                 $donation->setListeevents(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

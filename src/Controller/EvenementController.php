@@ -5,18 +5,17 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
-use App\service\QrcodeService;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
     #[Route('/', name: 'app_evenement_index')]
-    public function index(EvenementRepository $evenementRepository)
+    public function index(Request $request,PaginatorInterface $paginator,EvenementRepository $evenementRepository)
     {
         $evenements= $evenementRepository->findAll();
         return $this->render('evenement/index.html.twig', array(

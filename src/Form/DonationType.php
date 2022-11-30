@@ -18,7 +18,8 @@ class DonationType extends AbstractType
             ->add('montants')
             ->add('listesponsors',EntityType::class,array(
                 'class'=>Sponsor::class,
-                'choice_label'=>'nom_societe'
+                'choice_label'=>'nom_societe',
+                'autocomplete' => true
             ))
             ->add('submit',SubmitType::class)
 

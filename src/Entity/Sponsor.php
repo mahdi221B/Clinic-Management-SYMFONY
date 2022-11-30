@@ -40,6 +40,9 @@ class Sponsor
     #[ORM\OneToMany(mappedBy: 'listesponsors', targetEntity: Donation::class, orphanRemoval: true)]
     private Collection $donations;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $logo = null;
+
     public function __construct()
     {
         $this->donations = new ArrayCollection();
@@ -136,6 +139,18 @@ class Sponsor
                 $donation->setListesponsors(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
 
         return $this;
     }

@@ -9,6 +9,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class EvenementType extends AbstractType
 {
@@ -23,11 +24,11 @@ class EvenementType extends AbstractType
             ->add('phone_organisateur')
             ->add('date_debut')
             ->add('date_fin')
-            ->add('montant_recole')
             ->add('typeEvenement',EntityType::class,array(
                 'class'=>TypeEvenement::class,
                 'choice_label'=>'nom'
             ))
+            ->add('picture', DropzoneType::class)
             ->add('submit',SubmitType::class)
            // ->add('sponsors')
         ;

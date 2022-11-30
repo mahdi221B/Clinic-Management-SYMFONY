@@ -6,7 +6,9 @@ use App\Entity\Evenement;
 use App\Repository\EvenementRepository;
 use App\Repository\SponsorRepository;
 use App\service\QrcodeService;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,11 +21,16 @@ class FrontOfficeController extends AbstractController
     }
 
     #[Route('/fronteve', name: 'app_front_eve')]
-    public function fronteve(EvenementRepository $evenementRepository)
+    public function fronteve(Request $request,PaginatorInterface $paginator,EvenementRepository $evenementRepository)
     {
         $evenements= $evenementRepository->findAll();
+            $pagination = $paginator->paginate(
+            $evenements,
+            $request->query->getInt('page', 1),
+            3
+            );
         return $this->render('front-office/fronteve.html.twig', array(
-            'evenements' => $evenements
+            'evenements' => $pagination
         ));
     }
 
@@ -66,6 +73,5 @@ class FrontOfficeController extends AbstractController
     public function meet()
     {
         return $this->render('meet.html.twig');
-
     }
 }

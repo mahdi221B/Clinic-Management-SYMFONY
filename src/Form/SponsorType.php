@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class SponsorType extends AbstractType
 {
@@ -18,7 +19,8 @@ class SponsorType extends AbstractType
             ->add('phone_societe')
             ->add('montant_donnee')
             ->add('type_sponsoring')
-          //  ->add('evenements')
+            ->add('logo', DropzoneType::class)
+            //  ->add('evenements')
           ->add('submit',SubmitType::class, ['label' => 'Enregistrer'])
 
         ;

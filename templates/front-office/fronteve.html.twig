@@ -143,7 +143,6 @@
                             labore laborum necessitatibus quis, earum, repellat facilis adipisci,
                             dolores corporis ipsam ratione eaque vitae quia sunt nemo et
                             repudiandae porro incidunt.
-                            {{ i.description }}
                             <button>See more...</button>
                         </p>
                     </div>
@@ -152,6 +151,10 @@
 
             </div>
 
+        </div>
+        <div class="d-flex justify-content-center mt-6">
+            {% do evenements.setPageRange(4) %}
+            {{ knp_pagination_render(evenements,'pagination.html.twig') }}
         </div>
     </section>
 
