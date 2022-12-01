@@ -173,6 +173,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/intervention/image" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/ux-autocomplete" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/ux-swup" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/twig-pack" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/google/recaptcha" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/victor-prdh/recaptcha-bundle" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/karser/karser-recaptcha3-bundle" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

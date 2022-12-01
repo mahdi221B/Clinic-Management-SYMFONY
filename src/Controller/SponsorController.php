@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Knp\Component\Pager\PaginatorInterface;
 
 
@@ -21,11 +19,16 @@ use Knp\Component\Pager\PaginatorInterface;
 class SponsorController extends AbstractController
 {
     #[Route('/', name: 'app_sponsor_index')]
-    public function index(SponsorRepository $sponsorRepository)
+    public function index(Request $request,PaginatorInterface $paginator,SponsorRepository $sponsorRepository)
     {
         $sponsors= $sponsorRepository->findAll();
+        $pagination = $paginator->paginate(
+            $sponsors,
+            $request->query->getInt('page', 1),
+            4
+        );
         return $this->render('sponsor/index.html.twig', array(
-            'sponsors' => $sponsors
+            'sponsors' => $pagination
         ));
     }
 
@@ -74,17 +77,13 @@ class SponsorController extends AbstractController
     #[Route('/detailSpon/{id}', name: 'app_spon_detail')]
     public function detailespon($id,SponsorRepository $Repository,PdfService $pdfService)
     {
-        $html = $this->render('sponsor/show.html.twig',array(
+        return $this->render('sponsor/show.html.twig',array(
             'i' => $Repository->find($id)
         ));
-        $pdfService->showPdfFile($html);
-        return $html;
-
-
     }
 
     #[Route('/updatesponsor/{id}', name: 'update_sponsor')]
-    public function updateclassroom($id,Request $request,  SponsorRepository $repository,ManagerRegistry $managerRegistry)
+    public function updatesponsor($id,Request $request,  SponsorRepository $repository,ManagerRegistry $managerRegistry)
     {
         $sponsor = $repository->find($id);
         $form = $this->createForm(SponsorType::class, $sponsor);

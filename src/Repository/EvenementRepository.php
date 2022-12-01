@@ -63,7 +63,15 @@ class EvenementRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-
+    function geteByTypevenet($idtype){
+        return $this->createQueryBuilder('e')
+            ->join('e.typeEvenement','t')
+            ->addSelect('t')
+            ->where('t.id=:i')
+            ->setParameter('i',$idtype)
+            ->getQuery()->getResult()
+            ;
+    }
     public function gettotalDon(){
         $em=$this->getEntityManager();
         $qb=$em->createQuery("SELECT SUM(E.montant_recole) FROM APP\Entity\Evenement E");
@@ -87,7 +95,8 @@ class EvenementRepository extends ServiceEntityRepository
     public function gettopDonV(){
         $em=$this->getEntityManager();
         $qb=$em->createQuery("SELECT SUM(e.montant_recole) FROM APP\Entity\Evenement e order by e.montant_recole DESC");
-        return $qb->getQuery()->getResult();
+        return $qb->getQuery()
+            ->getResult();
     }
 
     public function getlastDonV(){
@@ -95,4 +104,15 @@ class EvenementRepository extends ServiceEntityRepository
         $qb=$em->createQuery("SELECT SUM(e.montant_recole) FROM APP\Entity\Evenement e order by e.montant_recole ASC");
         return $qb->getSingleScalarResult();
     }
-  }
+
+
+    public function getMonByTyev() {
+        $qb=  $this->createQueryBuilder('e')
+            ->having('e.montant_recole');
+        return $qb->getQuery()
+            ->getResult();
+    }
+
+
+
+}

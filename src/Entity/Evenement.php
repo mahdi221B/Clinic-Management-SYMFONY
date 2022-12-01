@@ -55,9 +55,11 @@ class Evenement
     private ?string $date_fin = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"Champ vide")]
     private ?int $montant_recole = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message:"You have to add a picture")]
+    private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'evenements')]
     #[ORM\JoinColumn(onDelete: "CASCADE")]
@@ -66,8 +68,7 @@ class Evenement
     #[ORM\OneToMany(mappedBy: 'listeevents', targetEntity: Donation::class, orphanRemoval: true)]
     private Collection $donations;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $picture = null;
+
 
     public function __construct()
     {

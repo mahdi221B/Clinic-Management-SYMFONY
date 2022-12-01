@@ -231,13 +231,7 @@
                                 <div class="bg-gradient-primary border-radius-lg h-100">
                                     <img src="{{asset('back-office/assets/img/shapes/waves-white.svg')}}" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
                                     <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                                        <img class="w-100 position-relative z-index-2 pt-4" src="{{data_uri_thumbnail('back-office/assets/img/illustrations/rocket-white.png', 40, 30)}}"
-                                            {{ stimulus_controller('symfony/ux-lazy-image/lazy-image', {
-                                                src: asset('back-office/assets/img/illustrations/rocket-white.png')
-                                            }) }}
-
-                                             alt="A blurhash image that is replaced by the real image on load"
-                                             width="400">
+                                        <img class="w-100 position-relative z-index-2 pt-4" src="{{asset('back-office/assets/img/illustrations/rocket-white.png')}}">
                                     </div>
                                 </div>
                             </div>

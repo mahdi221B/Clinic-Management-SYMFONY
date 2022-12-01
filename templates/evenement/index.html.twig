@@ -128,9 +128,10 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <a href="{{ path('app_evenement_new') }}">Add</a>
-
-                            <h6>Table d'événements</h6>
+                            <h3 class="text-uppercase text-center text-black">Table d'évènement</h3>
+                            <div class="card-header pb-0 col-6">
+                                <a class="btn bg-gradient-dark mb-0" href="{{ path('app_evenement_new') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Event</a>
+                            </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -146,9 +147,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date début</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date fin</th>
                                         <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Montant</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Modifier</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Supprimer</th>
-                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Détaille</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                                         <th class="text-secondary opacity-7"></th>
                                     </tr>
                                     </thead>
@@ -182,10 +181,13 @@
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-s font-weight-bold">{{ i.montantrecole }}</span>
                                             </td>
-
-                                            <td><a href="{{path('update_evenement',{'id':i.id}) }}">Update</a></td>
-                                            <td><a href="{{path('app_evenement_delete',{'id':i.id}) }}">Delete</a></td>
-                                            <td><a href="{{path('app_evenement2_detail',{'id':i.id}) }}">Detail</a></td>
+                                            <td>
+                                                <div class="ms-auto text-end">
+                                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{path('app_evenement_delete',{'id':i.id}) }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                    <a class="btn btn-link text-success px-3 mb-0" href="{{path('update_evenement',{'id':i.id}) }}"><i class="fas fa-pencil-alt text-success me-2" aria-hidden="true"></i>Edit</a>
+                                                    <a class="btn btn-link text-info px-3 mb-0" href="{{path('app_evenement2_detail',{'id':i.id}) }}"><i class="fa fa-info text-info me-2"></i>details</a>
+                                                </div>
+                                            </td>
                                         </tr>
                                     {% endfor %}
                                     {#<tr>
@@ -363,7 +365,10 @@
                     </div>
                 </div>
             </div>
-
+            <div class="d-flex justify-content-center mt-6">
+                {% do evenements.setPageRange(4) %}
+                {{ knp_pagination_render(evenements,'pagination.html.twig') }}
+            </div>
             <footer class="footer pt-3  ">
                 <div class="container-fluid">
                     <div class="row align-items-center justify-content-lg-between">

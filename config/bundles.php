@@ -22,4 +22,6 @@ return [
     Symfony\UX\Dropzone\DropzoneBundle::class => ['all' => true],
     Symfony\UX\LazyImage\LazyImageBundle::class => ['all' => true],
     Symfony\UX\Autocomplete\AutocompleteBundle::class => ['all' => true],
+    Karser\Recaptcha3Bundle\KarserRecaptcha3Bundle::class => ['all' => true],
+    VictorPrdh\RecaptchaBundle\RecaptchaBundle::class => ['all' => true],
 ];

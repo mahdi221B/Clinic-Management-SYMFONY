@@ -25,7 +25,7 @@ class CalendarController extends AbstractController
                 'title' => $event->getTitre()." / ",
                 'resultat' => $event->getDescription(),
                 'start' => $event->getDateDebut() ?? '',
-                'end' =>($event->getDateFin()) ?? '',
+                'end' =>($event->getDateFin()) ?? ''
             ];
         }
         $data = json_encode($rdvs);

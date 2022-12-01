@@ -7,6 +7,8 @@ use App\Form\TEvenementType;
 use App\Form\TypeEvenementType;
 use App\Repository\TypeEvenementRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Karser\Recaptcha3Bundle\Validator\Constraints\Recaptcha3Validator;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,25 +17,37 @@ use Symfony\Component\Routing\Annotation\Route;
 class TypeEvenementController extends AbstractController
 {
     #[Route('/', name: 'app_typeevent_index')]
-    public function index(TypeEvenementRepository $typeEvenementRepository)
+    public function index(Request $request,PaginatorInterface $paginator,TypeEvenementRepository $typeEvenementRepository)
     {
         $typeEvenement= $typeEvenementRepository->findAll();
+        $pagination = $paginator->paginate(
+            $typeEvenement,
+            $request->query->getInt('page', 1),
+            4
+        );
         return $this->render('type_evenement/index.html.twig', array(
-            'typeevenement' => $typeEvenement
+            'typeevenement' => $pagination
         ));
     }
 
     #[Route('/new', name: 'app_type_new')]
-    public function new(Request $request,ManagerRegistry $managerRegistry, TypeEvenementRepository $typeEvenementRepository)
+    public function new(Request $request,Recaptcha3Validator $recaptcha3Validator,ManagerRegistry $managerRegistry, TypeEvenementRepository $typeEvenementRepository)
     {
         $typeEvenement = new TypeEvenement();
         $form = $this->createForm(TEvenementType::class, $typeEvenement);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $score = $recaptcha3Validator->getLastResponse()->getScore();
+            if($score > 0.1){
             $em = $managerRegistry->getManager();
             $em->persist($typeEvenement);
             $em->flush();
             return $this->redirectToRoute('app_typeevent_index');
+            }
+            return $this->renderForm('type_evenement/add.html.twig',array(
+                'typeEvenement' => $typeEvenement,
+                'form' => $form
+            ));
         }
         return $this->renderForm('type_evenement/add.html.twig',array(
             'typeEvenement' => $typeEvenement,

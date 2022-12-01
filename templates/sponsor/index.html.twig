@@ -127,10 +127,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            <a href="{{ path('app_sponsor_new') }}">Add</a>
-
-                            <h6>Table des sponsors</h6>
+                            <h3 class="text-uppercase text-center text-black">Table des sponsors</h3>
+                        <div class="card-header pb-0 col-6">
+                            <a class="btn bg-gradient-dark mb-0" href="{{ path('app_sponsor_new') }}"><i class="fas fa-plus"></i>&nbsp;&nbsp;Add New Sponsor</a>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -142,9 +141,7 @@
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Téléphone societe</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Montant donnée</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Type Sponsoring</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Modifier</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Supprimer</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Détail</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
                                        <th class="text-secondary opacity-7"></th>
                                     </tr>
                                     </thead>
@@ -166,10 +163,14 @@
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-xs font-weight-bold">{{ i.typesponsoring }}</span>
                                             </td>
+                                            <td>
+                                                <div class="ms-auto text-end">
+                                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="{{path('app_sponsor_delete',{'id':i.id}) }}"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                    <a class="btn btn-link text-success px-3 mb-0" href="{{path('update_sponsor',{'id':i.id}) }}"><i class="fas fa-pencil-alt text-success me-2" aria-hidden="true"></i>Edit</a>
+                                                    <a class="btn btn-link text-info px-3 mb-0" href="{{path('app_spon_detail',{'id':i.id}) }}"><i class="fa fa-info text-info me-2"></i>details</a>
+                                                </div>
+                                            </td>
 
-                                            <td><a href="{{path('update_sponsor',{'id':i.id}) }}">Update</a></td>
-                                            <td><a href="{{path('app_sponsor_delete',{'id':i.id}) }}">Delete</a></td>
-                                            <td><a href="{{path('app_spon_detail',{'id':i.id}) }}">Detail</a></td>
                                         </tr>
                                     {% endfor %}
                                     {#<tr>
@@ -346,6 +347,10 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="d-flex justify-content-center mt-6">
+                {% do sponsors.setPageRange(4) %}
+                {{ knp_pagination_render(sponsors,'pagination.html.twig') }}
             </div>
 
             <footer class="footer pt-3  ">

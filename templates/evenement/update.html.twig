@@ -194,13 +194,6 @@
                                             <td>{{ form_help(form.date_fin)}}</td>
                                         </tr>
 
-                                        <tr>
-                                            <td>{{ form_label(form.montant_recole,"Montant recolté")}}</td>
-                                            <td>{{ form_widget(form.montant_recole)}}</td>
-                                            <td>{{ form_errors(form.montant_recole)}}</td>
-                                            <td>{{ form_help(form.montant_recole)}}</td>
-                                        </tr>
-
                                     </table>
                                     {{ form_end(form) }}
                                     <a href="{{ path('app_evenement_index') }}">back to list</a>

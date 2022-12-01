@@ -20,15 +20,12 @@ class QrcodeService
         $this->builder = $builder;
     }
 
-    public function qrcode($query='symfony')
+    public function qrcode($query='No informations available',
+                           $url = 'Event details :')
     {
-        $url = 'https://www.google.com/search?q=';
-
         $objDateTime = new \DateTime('NOW');
         $dateString = $objDateTime->format('d-m-Y H:i:s');
-
         $path = dirname(__DIR__, 2).'/public/';
-
         // set qrcode
         $result = $this->builder
             ->data($url.$query)

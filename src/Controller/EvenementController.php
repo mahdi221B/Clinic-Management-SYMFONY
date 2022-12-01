@@ -5,6 +5,9 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
+use App\Repository\SponsorRepository;
+use App\service\PdfService;
+use App\service\QrcodeService;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,11 +18,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class EvenementController extends AbstractController
 {
     #[Route('/', name: 'app_evenement_index')]
-    public function index(Request $request,PaginatorInterface $paginator,EvenementRepository $evenementRepository)
+    public function index(Request $request,PaginatorInterface $paginator,SponsorRepository $sponsorRepository,EvenementRepository $evenementRepository)
     {
         $evenements= $evenementRepository->findAll();
+        $pagination = $paginator->paginate(
+            $evenements,
+            $request->query->getInt('page', 1),
+            4
+        );
         return $this->render('evenement/index.html.twig', array(
-            'evenements' => $evenements
+            'evenements' => $pagination
         ));
     }
 
@@ -30,6 +38,15 @@ class EvenementController extends AbstractController
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $image= $request -> files->get ('evenement')['picture'];
+            $uploads_directory= $this->getParameter('uploads_directory');
+            $filename =md5(uniqid()) . '.' . $image ->guessExtension();
+            $image ->move(
+                $uploads_directory,
+                $filename
+            );
+            $evenement->setPicture($filename);
+            $evenement->setMontantRecole(0);
             $em = $managerRegistry->getManager();
             $em->persist($evenement);
             $em->flush();
@@ -74,6 +91,40 @@ class EvenementController extends AbstractController
             'evenement' => $evenement,
             'form' => $form
         ));
+    }
+
+
+
+    #[Route('/detailEventfront/{id}', name: 'app_eveFront_detail')]
+    public function detailespon($id,EvenementRepository $evenementRepository,PdfService $pdfService, QrcodeService $qrcodeService)
+    {
+        $evenement = $evenementRepository->find($id);
+        $content = "
+        Event : ".$evenement->getTitre()."
+        ".
+            "Description : ".$evenement->getDescription()."
+            ".
+            "Date début : ".$evenement->getDateDebut()."
+            ".
+            "Date fin".$evenement->getDateFin()."
+            ".
+            "lieu : ".$evenement->getLieu()."
+            ".
+            "Nom organisateur".$evenement->getNomOrganisateur()."
+            ".
+            "téléphone : ".$evenement->getPhoneOrganisateur()."
+            ".
+            "E-mail".$evenement->getEmailOrganisateur()."
+            "
+        ;
+        $qrCode = null;
+        $qrCode = $qrcodeService->qrcode($content);
+        $html = $this->render('evenement/pdf.html.twig',array(
+            'i' => $evenement,
+            'qrCode' => $qrCode
+        ));
+        $pdfService->showPdfFile($html);
+        return $html;
     }
 
 

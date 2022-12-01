@@ -6,6 +6,7 @@ use App\Entity\Evenement;
 use App\Entity\TypeEvenement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,13 +25,12 @@ class EvenementType extends AbstractType
             ->add('phone_organisateur')
             ->add('date_debut')
             ->add('date_fin')
+            ->add('picture', DropzoneType::class, array('data_class' => null))
             ->add('typeEvenement',EntityType::class,array(
                 'class'=>TypeEvenement::class,
                 'choice_label'=>'nom'
             ))
-            ->add('picture', DropzoneType::class)
             ->add('submit',SubmitType::class)
-           // ->add('sponsors')
         ;
     }
 

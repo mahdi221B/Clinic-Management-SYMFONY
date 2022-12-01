@@ -12,38 +12,19 @@
             <article class="wrapper">
                 <div class="marquee">
                     <div class="marquee__group">
+                        {% for i in topsponors %}
                         <svg>
-                            <use xlink:href="#mcdonalds" />
+                            <img src="{{asset('uploads/'~ i.logo)}}" alt=""/>
                         </svg>
-                        <svg>
-                            <use xlink:href="#jordan" />
-                        </svg>
-                        <svg>
-                            <use xlink:href="#aws" />
-                        </svg>
-                        <svg>
-                            <use xlink:href="#spotify" />
-                        </svg>
-                        <svg>
-                            <use xlink:href="#burger-king" />
-                        </svg>
-                        <svg>
-                            <use xlink:href="#honda" />
-                        </svg>
-                        <svg>
-                            <use xlink:href="#notion" />
-                        </svg>
-                        <svg>
-                            <use xlink:href="#hulu" />
-                        </svg>
+                        {% endfor %}
                     </div>
                 </div>
             </article>
-
+{#
             <svg style="display: none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <symbol id="mcdonalds" viewBox="0 0 24 24">
-                        <path d="M17.243 3.006c2.066 0 3.742 8.714 3.742 19.478H24c0-11.588-3.042-20.968-6.766-20.968-2.127 0-4.007 2.81-5.248 7.227-1.241-4.416-3.121-7.227-5.231-7.227C3.031 1.516 0 10.888 0 22.476h3.014c0-10.763 1.658-19.47 3.724-19.47 2.066 0 3.741 8.05 3.741 17.98h2.997c0-9.93 1.684-17.98 3.75-17.98Z" />
+                        <p>kkkkk</p>
                     </symbol>
 
                     <symbol id="jordan" viewBox="0 0 24 24">
@@ -74,34 +55,9 @@
                         <path d="M14.707 15.957h1.912V8.043h-1.912zm-3.357-2.256a.517.517 0 01-.512.511H9.727a.517.517 0 01-.512-.511v-3.19H7.303v3.345c0 1.368.879 2.09 2.168 2.09h1.868c1.189 0 1.912-.856 1.912-2.09V10.51h-1.912c.01 0 .01 3.09.01 3.19zm10.75-3.19v3.19a.517.517 0 01-.512.511h-1.112a.517.517 0 01-.511-.511v-3.19h-1.912v3.345c0 1.368.878 2.09 2.167 2.09h1.868c1.19 0 1.912-.856 1.912-2.09V10.51zm-18.32 0H2.557c-.434 0-.645.11-.645.11V8.044H0v7.903h1.9v-3.179c0-.278.234-.511.512-.511h1.112c.278 0 .511.233.511.511v3.19h1.912v-3.446c0-1.445-.967-2-2.167-2Z" />
                     </symbol>
                 </defs>
-            </svg>
+            </svg> #}
         </div>
     </section><!-- End Cta Section -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -126,16 +82,16 @@
                             <a href="{{path('app_donation',{'id':i.id}) }}" ><i class="fa-solid fa-money-bill"></i></a>
                         </li>
                         <li>
-                            <a href="{{path('app_qr_test',{'id':i.lieu}) }}" ><i class="fa-solid fa-qrcode"></i></a>
+                            <a href="{{path('app_qr_test',{'id':i.id}) }}" ><i class="fa-solid fa-qrcode"></i></a>
                         </li>
                         <li>
-                            <i class="fa-solid fa-store-alt"></i>
+                            <a href="{{path('app_eveFront_detail',{'id':i.id}) }}" ><i class="fa-solid fa-file-pdf"></i></a>
                         </li>
                         <li>
                             <i class="fa-solid fa-map"></i>
                         </li>
                     </ul>
-                    <img src="https://images.unsplash.com/photo-1518057111178-44a106bad636?ixlib=rb-1.2.1&w=1080&fit=max&q=80&fm=jpg&crop=entropy&cs=tinysrgb" alt=""/>
+                    <img src="{{asset('uploads/'~ i.picture)}}" alt=""/>
                     <div class="content">
                         <h2>{{ i.titre }}</h2>
                         <p>
@@ -158,91 +114,10 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- ======= About Us Section ======= -->
     <section class="sect">
         <div class="centered text">Moving clouds background animation.</div>
     </section>
 
 
-
-
-
-
-    <section>
-    <div class="container-fluid py-4">
-    <div class="row">
-    <div class="col-12">
-        <div class="card mb-4">
-            <div class="card-header pb-0">
-                <h6>Table d'événements</h6>
-            </div>
-            <div class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive p-0">
-                    <table class="table align-items-center mb-0">
-                        <thead>
-                        <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Titre</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Description</th>
-                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Lieu</th>
-                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Organisateur</th>
-                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">E-mail organisateur</th>
-                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Phone organisateur</th>
-                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date début</th>
-                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date fin</th>
-                            <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Montant</th>
-                            <th class="text-secondary opacity-7"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for i in evenements %}
-                            <tr>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.titre }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.description }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.lieu }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.nomorganisateur }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.emailorganisateur }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.phoneorganisateur }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.datedebut }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.datefin }}</span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span class="text-secondary text-s font-weight-bold">{{ i.montantrecole }}</span>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    </section>
 {% endblock %}

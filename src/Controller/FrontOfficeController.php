@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Repository\EvenementRepository;
 use App\Repository\SponsorRepository;
+use App\Repository\TypeEvenementRepository;
 use App\service\QrcodeService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,8 +22,9 @@ class FrontOfficeController extends AbstractController
     }
 
     #[Route('/fronteve', name: 'app_front_eve')]
-    public function fronteve(Request $request,PaginatorInterface $paginator,EvenementRepository $evenementRepository)
+    public function fronteve(Request $request,SponsorRepository $sponsorRepository,PaginatorInterface $paginator,EvenementRepository $evenementRepository)
     {
+        $topSponors= $sponsorRepository->topSponors();
         $evenements= $evenementRepository->findAll();
             $pagination = $paginator->paginate(
             $evenements,
@@ -30,10 +32,26 @@ class FrontOfficeController extends AbstractController
             3
             );
         return $this->render('front-office/fronteve.html.twig', array(
-            'evenements' => $pagination
+            'evenements' => $pagination,
+            'topsponors' => $topSponors
         ));
     }
 
+    #[Route('/frontevebyid/{id}', name: 'app_frontby_eve')]
+    public function frontevebyid($id,Request $request,SponsorRepository $sponsorRepository,PaginatorInterface $paginator,EvenementRepository $evenementRepository)
+    {
+        $topSponors= $sponsorRepository->topSponors();
+        $evenements= $evenementRepository->geteByTypevenet($id);
+        $pagination = $paginator->paginate(
+            $evenements,
+            $request->query->getInt('page', 1),
+            3
+        );
+        return $this->render('front-office/fronteve.html.twig', array(
+            'evenements' => $pagination,
+            'topsponors' => $topSponors
+        ));
+    }
     #[Route('/map', name: 'mapmap')]
     public function map()
     {
@@ -48,6 +66,19 @@ class FrontOfficeController extends AbstractController
             'sponsors' => $sponsors
         ));
     }
+    #[Route('/categorie', name: 'app_front_spon')]
+    public function categorie(Request $request,PaginatorInterface $paginator, TypeEvenementRepository $typeEvenementRepository)
+    {
+        $categorie= $typeEvenementRepository->findAll();
+        $pagination = $paginator->paginate(
+            $categorie,
+            $request->query->getInt('page', 1),
+            3
+        );
+        return $this->render('front-office/fontcate.html.twig', array(
+            'categorie' => $pagination
+        ));
+    }
     #[Route('/backoffice', name: 'app_back_office')]
     public function backofficeindex(EvenementRepository $evenementRepository)
     {
@@ -59,11 +90,30 @@ class FrontOfficeController extends AbstractController
             ));
     }
     #[Route('/qrcode/{id}', name: 'app_qr_test')]
-    public function qrcode($id,QrcodeService $qrcodeService)
+    public function qrcode($id,EvenementRepository $evenementRepository,QrcodeService $qrcodeService)
     {
+        $evenement = $evenementRepository->find($id);
+        $content = "
+        Event : ".$evenement->getTitre()."
+        ".
+            "Description : ".$evenement->getDescription()."
+            ".
+            "Date début : ".$evenement->getDateDebut()."
+            ".
+            "Date fin".$evenement->getDateFin()."
+            ".
+            "lieu : ".$evenement->getLieu()."
+            ".
+            "Nom organisateur".$evenement->getNomOrganisateur()."
+            ".
+            "téléphone : ".$evenement->getPhoneOrganisateur()."
+            ".
+            "E-mail".$evenement->getEmailOrganisateur()."
+            "
+        ;
         $qrCode = null;
-        $qrCode = $qrcodeService->qrcode($id);
-        return $this->render('sponsor/detaille.html.twig', array(
+        $qrCode = $qrcodeService->qrcode($content);
+        return $this->render('evenement/detaille.html.twig', array(
             'qrCode' => $qrCode,
         ));
 

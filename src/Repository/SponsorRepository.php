@@ -63,4 +63,11 @@ class SponsorRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function topSponors(){
+        $em=$this->getEntityManager();
+        $qb=$em->createQuery("SELECT s FROM APP\Entity\Sponsor s WHERE s.montant_donnee >= 200 ORDER BY s.montant_donnee ASC")
+            ->setMaxResults(5);
+        return $qb->getResult();
+    }
 }
