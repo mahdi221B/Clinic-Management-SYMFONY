@@ -43,7 +43,8 @@ class UserType extends AbstractType
                     'placeholder'=>'nom@exemple.com'
                 ]])
             ->add('Role',ChoiceType::class,array(
-                'choices'=>['Admin'=>'ROLE_ADMIN','Medecin'=>'ROLE_MEDECIN','infirmier'=>'ROLE_INFIRMIER']
+                'choices'=>['Admin'=>'ROLE_ADMIN','Medecin'=>'ROLE_MEDECIN','infirmier'=>'ROLE_INFIRMIER','agent_stock'=>'ROLE_STOCK','secretaire'=>'ROLE_SECRETAIRE','technicien'=>'ROLE_TECHNICIEN'
+                    ,'user_role'=>'ROLE_USER']
             ))
             ->add('MotPasse',PasswordType::class,
                 ['label'=>'MotPasse',

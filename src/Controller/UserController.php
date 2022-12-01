@@ -118,35 +118,57 @@ class UserController extends AbstractController
     public function detailuser($id,UserRepository $repository)
     {
         $user = $repository->find($id);
-        return new Response(
 
-
-            '<br>id: '.$user->getId()
-
-            .'<br>nom: '.$user->getNom()
-            .'<br>prenom: '.$user->getPrenom()
-            .'<br>sexe: '.$user->getSexe()
-            .'<br>num_tel: '.$user->getNumTel()
-
-            .'<br>cin: '.$user->getCin()
-            .'<br>role: '.$user->getRole()
-
-        );
+        return $this->render("user/detail.html.twig",
+            ['i' => $user]);
     }
+    //////////////////////////////////      Roles Users                    ///////////////////////////////////////////////////////
     #[Route('doctor', name: 'doc')]
     public function doc()
                 {
                     return $this->render('User/doc.html.twig');
                 }
+ //   infirmier
     #[Route('infirmier', name: 'infir')]
     public function infirmier()
     {
         return $this->render('User/infir.html.twig');
     }
+
+    //route compte bloquée
     #[Route('blocked', name: 'blocked')]
     public function blocked()
     {
         return $this->render('User/blocked.html.twig');
     }
+
+    //role user simple
+    #[Route('user_role', name: 'user_role')]
+    public function user_role()
+    {
+        return $this->render('User/userrole.html.twig');
+    }
+
+    //role agent de stock
+    #[Route('agent_stock', name: 'agent_stock')]
+    public function agent()
+    {
+        return $this->render('User/agent.html.twig');
+    }
+
+   // role  secretaire
+    #[Route('secretaire', name: 'secretaire')]
+    public function secretaire()
+    {
+        return $this->render('User/secretaire.html.twig');
+    }
+
+    // role technicien
+    #[Route('technicien', name: 'technicien')]
+    public function technicien()
+    {
+        return $this->render('User/technicien.html.twig');
+    }
+
 
 }

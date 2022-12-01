@@ -70,11 +70,46 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($this->urlGenerator->generate('infir'));
 
         }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(in_array('ROLE_STOCK',$user->getRoles(),true)){
+            if(false === $user->isEnabled()) {
+                return new RedirectResponse($this->urlGenerator->generate('blocked'));
+            }
+
+            return new RedirectResponse($this->urlGenerator->generate('agent_stock'));
+
+        }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(in_array('ROLE_SECRETAIRE',$user->getRoles(),true)){
+            if(false === $user->isEnabled()) {
+                return new RedirectResponse($this->urlGenerator->generate('blocked'));
+            }
+
+            return new RedirectResponse($this->urlGenerator->generate('secretaire'));
+
+        }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(in_array('ROLE_TECHNICIEN',$user->getRoles(),true)){
+            if(false === $user->isEnabled()) {
+                return new RedirectResponse($this->urlGenerator->generate('blocked'));
+            }
+
+            return new RedirectResponse($this->urlGenerator->generate('technicien'));
+
+        }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        if(in_array('ROLE_USER',$user->getRoles(),true)){
+            if(false === $user->isEnabled()) {
+                return new RedirectResponse($this->urlGenerator->generate('blocked'));
+            }
+
+            return new RedirectResponse($this->urlGenerator->generate('user_role'));
+
+        }
 
 
 
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         return new RedirectResponse($this->urlGenerator->generate('affiche'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
