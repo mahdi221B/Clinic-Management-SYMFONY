@@ -66,7 +66,7 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $em = $managerRegistry->getManager();
         $em -> persist($commande);
         $em->flush();
-        //$CommandeRepository->sendsms();
+        $CommandeRepository->sendsms();
         return $this->redirectToRoute("list_commande");
     }
 
@@ -74,14 +74,7 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
     #[Route('/refuse/{id}', name: 'refuse_commande')]
     public function refuse($id ,Request $request,ManagerRegistry $managerRegistry ,CommandeRepository $CommandeRepository , ArticlesRepository $ArticlesRepository)
     {
-
         $commande = $CommandeRepository->find($id);
-
-
-        //  $Article = $ArticlesRepository->find($commande->getArticle());
-        //  $Article->setQte($Article->getQte()+$commande->getQteC() );
-
-        //$date = strtotime("now");
         $newFormat=date("d-m-Y",strtotime("now"));
         $commande->setDateCloture($newFormat);
         $commande->setStatus("refuse");
@@ -90,11 +83,8 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $em = $managerRegistry->getManager();
         $em -> persist($commande);
         $em->flush();
-        //$CommandeRepository->sendsms2();
-
+        $CommandeRepository->sendsms2();
         return $this->redirectToRoute("list_commande");
-
-
     }
 
     #[Route('/listcommande', name: 'list_commande')]
@@ -120,15 +110,20 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
 
             if ($form->isSubmitted()) {
                 $tab = $form->getData();
-                $commandes = $CommandeRepository->commandebetdate($tab['date1']->format('Y-m-d '), $tab['date2']->format('Y-m-d '));
+                $commandes = $CommandeRepository->commandebetdate($tab['date1']->format('d-m-Y'), $tab['date2']->format('d-m-Y'));
+                return $this->render('commande/between.html.twig',[
+                    'commande'=> $commandes
+                    ]
+
+                );
+
             }
         }
-        return $this->renderForm('commande/between.html.twig',array(
-
-            'form'=>$form,
-            'commande'=> $commandes
+        return $this->renderForm('commande/bet.html.twig',array( 'form'=>$form,
 
         ));
+
+
 
         //var_dump($date);
 
@@ -141,7 +136,7 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
             //var_dump($result1);
             //var_dump($result2);
 
-//                return $this->redirectToRoute("list_article");
+    //                return $this->redirectToRoute("list_article");
        }
 
 }

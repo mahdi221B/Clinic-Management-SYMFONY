@@ -23,7 +23,7 @@ class DatecommandeType extends AbstractType
 
             //->add('article')
 
-            ->add("listecommande",SubmitType::class)
+            ->add("listedescommande",SubmitType::class)
         ;
     }
 
