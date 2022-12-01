@@ -17,6 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/evenement')]
 class EvenementController extends AbstractController
 {
+    #[Route('/testchart', name: 'app_evenement_chart')]
+    public function chart(Request $request,SponsorRepository $sponsorRepository,EvenementRepository $evenementRepository)
+    {
+        $evenements= $evenementRepository->getMonByTyev();
+        dd($evenements);
+    }
     #[Route('/', name: 'app_evenement_index')]
     public function index(Request $request,PaginatorInterface $paginator,SponsorRepository $sponsorRepository,EvenementRepository $evenementRepository)
     {

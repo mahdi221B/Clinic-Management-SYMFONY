@@ -106,13 +106,6 @@ class EvenementRepository extends ServiceEntityRepository
     }
 
 
-    public function getMonByTyev() {
-        $qb=  $this->createQueryBuilder('e')
-            ->having('e.montant_recole');
-        return $qb->getQuery()
-            ->getResult();
-    }
-
 
 
 }

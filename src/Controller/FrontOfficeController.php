@@ -45,7 +45,7 @@ class FrontOfficeController extends AbstractController
         $pagination = $paginator->paginate(
             $evenements,
             $request->query->getInt('page', 1),
-            3
+            2
         );
         return $this->render('front-office/fronteve.html.twig', array(
             'evenements' => $pagination,

@@ -28,7 +28,9 @@ class EvenementType extends AbstractType
             ->add('picture', DropzoneType::class, array('data_class' => null))
             ->add('typeEvenement',EntityType::class,array(
                 'class'=>TypeEvenement::class,
-                'choice_label'=>'nom'
+                'choice_label'=>'nom',
+                'autocomplete' => true
+
             ))
             ->add('submit',SubmitType::class)
         ;
