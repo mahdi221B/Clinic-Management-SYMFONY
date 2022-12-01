@@ -65,7 +65,7 @@ class UserController extends AbstractController
             ['users'=>$user]);
     }
     #[Route('/admin/Update/{id_user}', name: 'Update')]
-    function Update(Request $request,UserRepository $repository,ManagerRegistry $managerRegistry,$id_user)
+    function Update(Request $request,UserPasswordHasherInterface $userPasswordHasher,UserRepository $repository,ManagerRegistry $managerRegistry,$id_user)
     {
         $user = $repository->find($id_user);
         $form = $this->createForm(UserType::class, $user);
@@ -73,6 +73,12 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em=$managerRegistry->getManager();
+            $user->setMotPasse(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('MotPasse')->getData()
+                )
+            );
             //$em->persist($classroom);
             $em->flush();
             return $this->redirectToRoute('affiche');
