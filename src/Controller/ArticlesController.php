@@ -82,7 +82,7 @@ class ArticlesController extends AbstractController
     public function touscommande($id, Request $request,ManagerRegistry $managerRegistry  ,CommandeRepository $CommandeRepository, ArticlesRepository $ArticlesRepository)
     {
         $Article = $ArticlesRepository->find($id);
-        $commandes= $Article->getCommandelist() ;
+        $commandes=  $Article->getCommandelist() ;
         $totalespent=0;
         $expr = new Comparison('status', '=', 'validee');
         $criteria = new Criteria();

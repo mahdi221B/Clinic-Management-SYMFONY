@@ -80,6 +80,14 @@ class CommandeRepository extends ServiceEntityRepository
 
     }
 
+    public function commandebetdate($min,$max) :array {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT c FROM App\Entity\Commande c WHERE c.date_cloture BETWEEN :min AND :max')
+            ->setParameter('min',$min)
+            ->setParameter('max',$max);
+        return $query->getResult();
+    }
+
     public function sendsms2(): void
     {
         $sid = "ACff096b193c1c973816cf724a9c445180" ;

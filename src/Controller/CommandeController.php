@@ -10,6 +10,7 @@ use App\Form\DatecommandeType;
 use App\Repository\ArticlesRepository;
 use App\Repository\BudgetRepository;
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -109,44 +110,38 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
     }
 
     #[Route('/commandesbetween}', name: 'between')]
-    public function between($id,Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository,CommandeRepository $CommandeRepository )
-    {
-        $Commande= $CommandeRepository ->findAll();
-
-         $date=strtotime(  $Commande->getDateCloture());
-         var_dump($date);
+    public function between(Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository,CommandeRepository $CommandeRepository )
+    {$commandes =0;
+        $Commande= $CommandeRepository ->findBy(['status'=>'validee']);
         $form = $this->createForm(DatecommandeType::class, null );
         $form ->handleRequest($request);
+        foreach ($Commande as $cle => $valeur) {
+            $date = strtotime($valeur->getDateCloture());
 
-        if ($form->isSubmitted()   ) {
+            if ($form->isSubmitted()) {
+                $tab = $form->getData();
+                $commandes = $CommandeRepository->commandebetdate($tab['date1']->format('Y-m-d '), $tab['date2']->format('Y-m-d '));
+            }
+        }
+        return $this->renderForm('commande/between.html.twig',array(
 
-//find all comandes
-            // select commande whre  date-cloture is between tab[date1] and tab (date 2 and  where statut %like validé]
-            $tab = $form->getData() ;
+            'form'=>$form,
+            'commande'=> $commandes
+
+        ));
+
+        //var_dump($date);
+
             //$qte = (string)$tab["field_name"] ;
-            var_dump($tab['date1'] ->format('Y-m-d ')  ) ;
-            var_dump($tab['date2'] ->format('Y-m-d ')  ) ;
-
-
+            //var_dump($tab['date1'] ->format('Y-m-d ')  ) ;
+            //var_dump($tab['date2'] ->format('Y-m-d ')  ) ;
             //var_dump($tab['date2']  ) ;
             //$result1 = $tab['date1'] ->format('Y-m-d ');
             //$result2= $tab['date2'] ->format('Y-m-d ');
-
             //var_dump($result1);
             //var_dump($result2);
 
-            die();
-
-
 //                return $this->redirectToRoute("list_article");
-
-            }
-
-
-        return $this->renderForm('commande/between.html.twig',array(
-
-            'form'=>$form
-
-        ));}
+       }
 
 }
