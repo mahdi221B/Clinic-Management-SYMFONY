@@ -34,9 +34,9 @@
 
             <div class="card-body">
 
-                <p class="blog-hashtag">#webdevelopment #frontend</p>
+                <p class="blog-hashtag">#ECLINIQUE</p>
                 <h2 class="blog-title">{{ i.title}}</h2>
-                <p class="blog-description">{{ i.Text }}</p>
+                <p class="blog-description">{{ i.Text|raw }}</p>
 
                 <div class="card-profile">
                     <a href ="{{ path('blog_show',{'id':i.id}) }}" class=" btn btn-primary"> lire la suite</a>

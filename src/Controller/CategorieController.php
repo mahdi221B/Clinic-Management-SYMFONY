@@ -12,6 +12,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Categorie;
 use Symfony\Component\HttpFoundation\Request;
 
+
 class CategorieController extends AbstractController
 {
     #[Route('/blogs', name: 'app_categorie_index')]

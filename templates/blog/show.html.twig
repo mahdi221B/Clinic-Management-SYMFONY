@@ -23,7 +23,7 @@
 
 
 
-        {{ posts.text }}
+        {{ posts.text|raw }}
         <style>
 
             i {
@@ -261,7 +261,7 @@
                             <div  class="header">
                                 <div  class="v-avatar avatar" style="height: 50px; width: 50px;"><img  src="https://images.unsplash.com/photo-1490894641324-cfac2f5cd077?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=100&q=70"></div>
                                 <span  class="displayName title">  {{ commentaire.autheur }} </span> <span  class="displayName caption"> publie le {{ commentaire.date }}</span></div>
-                            <!---->
+
                             <div  class="wrapper comment">
                                 <p>   {{ commentaire.text |raw }}.</p>
 

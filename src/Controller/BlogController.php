@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Controller;
-
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 use App\Entity\Commentaire;
 use App\Entity\Post;
 use App\Form\CommentaireType;
 use App\Form\PostType;
 use App\Repository\CommentaireRepository;
-use Doctrine\Bundle\DoctrineBundle\Registry;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -18,6 +18,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 class BlogController extends AbstractController
+
+
 {
     #[Route('/blog', name: 'blog')]
     public function index(Request $request,PostRepository $repo,PaginatorInterface $paginator): Response
@@ -26,7 +28,7 @@ class BlogController extends AbstractController
         $posts = $paginator->paginate(
             $posts, /* query NOT result */
             $request->query->getInt('page', 1),
-            2
+            3
         );
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
@@ -55,7 +57,7 @@ class BlogController extends AbstractController
 
 
             if(!$post->getId()){
-            $post->setDatePost(date("d-m-Y- h-i-s  ", strtotime("now ")));
+            $post->setDatePost(date("d-m-Y  / h-i-s  ", strtotime("now ")));
             }
             $em->persist($post);
             $em->flush();
@@ -98,7 +100,39 @@ class BlogController extends AbstractController
         ]);
     }
 
+    #[Route('/test', name: 'app_test')]
+    public function indexx(ChartBuilderInterface $chartBuilder, CommentaireRepository $commentaireRepository): Response
+    {
+
+        $comments= $commentaireRepository->findAll();
+        $label =[];
+        $data=[];
+        foreach ($comments as $comment)
+        {
+
+            $label[]=$comment->getAutheur();
+            $data[]=$comment->getId();
+        }
+        $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
+        $chart->setData([
+            'labels' => $label,
+            'datasets' => [
+                [
+                    'label' => '',
+                    'backgroundColor' => 'rgb(255,99,132',
+                    'borderColor' => 'rgb(255, 99, 132)',
+                    'data' => [1,2,3,4,5,6,7,8,9,10],
+
+                ],
+
+            ],
+        ]);
 
 
+        return $this->render('test.html.twig', [
+            'chart' => $chart,
+        ]);
+
+    }
 
 }

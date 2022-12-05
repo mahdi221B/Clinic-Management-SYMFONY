@@ -25,11 +25,14 @@ class MailerController extends AbstractController
 
         $email = (new Email())
             ->from('bacem.mallek999@gmail.com')
+
             ->to('bacem.mallek@esprit.tn')
             ->subject('Time for Symfony Mailer!')
 
             ->html("<h1>Congratulation [{$commentaireRepository-> topfan()}] ! ❤ you have won a Super fan badge!️</h1>
-<br> Ce badge vous permet de voir facilement les commentaires publiés par vos abonnés les plus engagés, puis d’y réagir ou d’y répondre.");
+<br> Ce badge vous permet de voir facilement les commentaires publiés par vos abonnés les plus engagés, puis d’y réagir ou d’y répondre
+
+");
 
         $mailer->send($email);
         return $this->render('mailer/index.html.twig', [
