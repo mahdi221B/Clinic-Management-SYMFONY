@@ -30,26 +30,21 @@ class SecurityUserController extends AbstractController
     {
         $securityContext = $this->container->get('security.authorization_checker');
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirectToRoute('affiche');
-
+            return $this->redirectToRoute('app_back_office');
         }
-
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', ['form' => $lastUsername, 'error' => $error]);
+        return $this->render('back-office/sign-in.html.twig', array(
+            'last_username' => $lastUsername,
+            'error' => $error));
     }
-
-
-
-
-
     #[Route(path: '/logout', name: 'app_logout')]
     public function logout(): void
     {
-        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key
+         on your firewall.');
     }
 
 

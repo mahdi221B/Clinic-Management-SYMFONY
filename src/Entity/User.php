@@ -108,12 +108,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getNom(): string
     {
         return $this->Nom;
     }
@@ -125,7 +125,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getPrenom(): string
     {
         return $this->Prenom;
     }
@@ -137,7 +137,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSexe(): ?string
+    public function getSexe(): string
     {
         return $this->Sexe;
     }
@@ -149,7 +149,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getNumTel(): ?int
+    public function getNumTel(): int
     {
         return $this->NumTel;
     }
@@ -161,7 +161,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCin(): ?int
+    public function getCin(): int
     {
         return $this->Cin;
     }
@@ -173,7 +173,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAdresse(): ?string
+    public function getAdresse(): string
     {
         return $this->Adresse;
     }
@@ -185,7 +185,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMotPasse(): ?string
+    public function getMotPasse(): string
     {
         return $this->MotPasse;
     }
@@ -257,12 +257,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->Adresse;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
         return $this->getMotPasse() ;
     }
 
-    public function isEnabled(): ?bool
+    public function isEnabled(): bool
     {
         return $this->enabled;
     }
@@ -285,7 +285,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return null;
     }
 
-    public function getResetToken(): ?string
+    public function getResetToken(): string
     {
         return $this->reset_token;
     }

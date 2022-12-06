@@ -21,6 +21,18 @@ class FrontOfficeController extends AbstractController
         return $this->render('front-office/frontindex.html.twig');
     }
 
+    #[Route('/signin', name: 'app_back_signin')]
+    public function signin(): Response
+    {
+        return $this->render('back-office/sign-in.html.twig');
+    }
+
+    #[Route('/signup', name: 'app_back_signup')]
+    public function signup(): Response
+    {
+        return $this->render('back-office/sign-up.html.twig');
+    }
+
     #[Route('/fronteve', name: 'app_front_eve')]
     public function fronteve(Request $request,SponsorRepository $sponsorRepository,PaginatorInterface $paginator,EvenementRepository $evenementRepository)
     {

@@ -21,16 +21,18 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    public function __construct(private UrlGeneratorInterface $urlGenerator)
+    public function __construct(UrlGeneratorInterface $urlGenerator)
     {
+        $this->urlGenerator= $urlGenerator;
     }
+    /*public function __construct(private UrlGeneratorInterface $urlGenerator)
+    {
+    }*/
 
     public function authenticate(Request $request): Passport
     {
         $adresse = $request->request->get('adresse', '');
-
         $request->getSession()->set(Security::LAST_USERNAME, $adresse);
-
         return new Passport(
             new UserBadge($adresse),
             new PasswordCredentials($request->request->get('password', '')),
@@ -46,6 +48,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+
         $user = $token->getUser();
         if(in_array('ROLE_ADMIN',$user->getRoles(),true)){
             if(false === $user->isEnabled()) {
@@ -58,59 +61,40 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             if(false === $user->isEnabled()) {
                 return new RedirectResponse($this->urlGenerator->generate('blocked'));
             }
-
             return new RedirectResponse($this->urlGenerator->generate('doc'));
-
         }
         if(in_array('ROLE_INFIRMIER',$user->getRoles(),true)){
             if(false === $user->isEnabled()) {
                 return new RedirectResponse($this->urlGenerator->generate('blocked'));
             }
-
             return new RedirectResponse($this->urlGenerator->generate('infir'));
-
         }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(in_array('ROLE_STOCK',$user->getRoles(),true)){
             if(false === $user->isEnabled()) {
                 return new RedirectResponse($this->urlGenerator->generate('blocked'));
             }
-
             return new RedirectResponse($this->urlGenerator->generate('agent_stock'));
-
         }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(in_array('ROLE_SECRETAIRE',$user->getRoles(),true)){
             if(false === $user->isEnabled()) {
                 return new RedirectResponse($this->urlGenerator->generate('blocked'));
             }
-
             return new RedirectResponse($this->urlGenerator->generate('secretaire'));
-
         }
-////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(in_array('ROLE_TECHNICIEN',$user->getRoles(),true)){
             if(false === $user->isEnabled()) {
                 return new RedirectResponse($this->urlGenerator->generate('blocked'));
             }
-
             return new RedirectResponse($this->urlGenerator->generate('technicien'));
-
         }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if(in_array('ROLE_USER',$user->getRoles(),true)){
             if(false === $user->isEnabled()) {
                 return new RedirectResponse($this->urlGenerator->generate('blocked'));
             }
-
             return new RedirectResponse($this->urlGenerator->generate('user_role'));
-
         }
 
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        return new RedirectResponse($this->urlGenerator->generate('affiche'));
+        return new RedirectResponse($this->urlGenerator->generate('app_back_office'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
