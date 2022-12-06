@@ -6,15 +6,18 @@ use App\Entity\Commande;
 use App\Entity\Articles;
 
 use App\Form\CommandeType;
+use App\Form\DatecommandeType;
 use App\Repository\ArticlesRepository;
+use App\Repository\BudgetRepository;
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
-use Twilio\Rest\Client;
+//use Twilio\Rest\Client;
 class CommandeController extends AbstractController
 {
     #[Route('/commande', name: 'app_commande')]
@@ -45,52 +48,33 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
     return $this->renderForm('commande/addc.html.twig',array(
     'commande'=> $commande,
     'form'=>$form
-
 )
-
-
     ) ;
-
-
-    }
+}
     #[Route('/confirm/{id}', name: 'confirm_commande')]
-    public function confirm($id ,Request $request,ManagerRegistry $managerRegistry ,CommandeRepository $CommandeRepository , ArticlesRepository $ArticlesRepository)
+    public function confirm($id ,Request $request,ManagerRegistry $managerRegistry ,CommandeRepository $CommandeRepository , ArticlesRepository $ArticlesRepository ,BudgetRepository $BudgetRepository)
     {
-
         $commande = $CommandeRepository->find($id);
-
-
-        //  $Article = $ArticlesRepository->find($commande->getArticle());
-        //  $Article->setQte($Article->getQte()+$commande->getQteC() );
-
-        //$date = strtotime("now");
+        $budget =  $BudgetRepository->findOneBy(['id'=> '1' ]);
         $newFormat=date("d-m-Y",strtotime("now"));
         $commande->getArticles()->setQte($commande->getQteC()+$commande->getArticles()->getQte());
         $commande->setDateCloture($newFormat);
-        $commande->setStatus("valideé");
+        $commande->setStatus("validee");
         $commande->setDateCloture($newFormat);
         $commande->setMotifCloture("cloturé avec suceé");
+        $budget->setMontant($budget->getMontant()-$commande->getPrixC() );
         $em = $managerRegistry->getManager();
         $em -> persist($commande);
         $em->flush();
-        //$CommandeRepository->sendsms();
+        $CommandeRepository->sendsms();
         return $this->redirectToRoute("list_commande");
-
-
     }
 
 
     #[Route('/refuse/{id}', name: 'refuse_commande')]
     public function refuse($id ,Request $request,ManagerRegistry $managerRegistry ,CommandeRepository $CommandeRepository , ArticlesRepository $ArticlesRepository)
     {
-
         $commande = $CommandeRepository->find($id);
-
-
-        //  $Article = $ArticlesRepository->find($commande->getArticle());
-        //  $Article->setQte($Article->getQte()+$commande->getQteC() );
-
-        //$date = strtotime("now");
         $newFormat=date("d-m-Y",strtotime("now"));
         $commande->setDateCloture($newFormat);
         $commande->setStatus("refuse");
@@ -99,19 +83,60 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $em = $managerRegistry->getManager();
         $em -> persist($commande);
         $em->flush();
+        $CommandeRepository->sendsms2();
         return $this->redirectToRoute("list_commande");
-
-
     }
 
     #[Route('/listcommande', name: 'list_commande')]
-    public function listeCommande(CommandeRepository  $repository)
+    public function listeCommande(  CommandeRepository  $repository ,BudgetRepository $BudgetRepository)
     {
-        // $classrooms= $this->getDoctrine()->getRepository(ClassroomRepository::class)->findAll();
         $Commande= $repository->findAll();
-        return $this->render("Commande/list.html.twig",array("commande"=>$Commande));
+        $budget =$BudgetRepository->findAll();
+
+        return $this->render("Commande/list.html.twig",array("commande"=>$Commande,
+                "budget"=>$budget
+                )
+        );
     }
 
+    #[Route('/commandesbetween}', name: 'between')]
+    public function between(Request $request,ManagerRegistry $managerRegistry  , ArticlesRepository $ArticlesRepository,CommandeRepository $CommandeRepository )
+    {$commandes =0;
+        $Commande= $CommandeRepository ->findBy(['status'=>'validee']);
+        $form = $this->createForm(DatecommandeType::class, null );
+        $form ->handleRequest($request);
+        foreach ($Commande as $cle => $valeur) {
+            $date = strtotime($valeur->getDateCloture());
 
+            if ($form->isSubmitted()) {
+                $tab = $form->getData();
+                $commandes = $CommandeRepository->commandebetdate($tab['date1']->format('d-m-Y'), $tab['date2']->format('d-m-Y'));
+                return $this->render('commande/between.html.twig',[
+                    'commande'=> $commandes
+                    ]
+
+                );
+
+            }
+        }
+        return $this->renderForm('commande/bet.html.twig',array( 'form'=>$form,
+
+        ));
+
+
+
+        //var_dump($date);
+
+            //$qte = (string)$tab["field_name"] ;
+            //var_dump($tab['date1'] ->format('Y-m-d ')  ) ;
+            //var_dump($tab['date2'] ->format('Y-m-d ')  ) ;
+            //var_dump($tab['date2']  ) ;
+            //$result1 = $tab['date1'] ->format('Y-m-d ');
+            //$result2= $tab['date2'] ->format('Y-m-d ');
+            //var_dump($result1);
+            //var_dump($result2);
+
+    //                return $this->redirectToRoute("list_article");
+       }
 
 }

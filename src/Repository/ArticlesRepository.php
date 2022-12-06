@@ -54,6 +54,7 @@ class ArticlesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
+
 //    public function findOneBySomeField($value): ?Articles
 //    {
 //        return $this->createQueryBuilder('a')
@@ -63,4 +64,19 @@ class ArticlesRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function commandevalidepararticle($id): array
+    {
+        $qb= $this->createQueryBuilder('a')
+
+            ->join('a.commandelist','c')
+            ->addSelect('c')
+            ->where('c.id=:id')
+            ->andWhere('c.status = :validee')
+            ->setParameter('id',$id);
+        return $qb->getQuery()
+            ->getResult();
+
+    }
 }
+

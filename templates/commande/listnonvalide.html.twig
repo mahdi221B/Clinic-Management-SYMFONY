@@ -1,4 +1,3 @@
-
 {% extends 'back-office/index-back.html.twig' %}
 {% block main %}
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -130,19 +129,41 @@
                     <div class="card mb-4">
                         <div class="card-header pb-0">
 
-                            <h6>Table de articles </h6>
+                            <h6>Table des Commande </h6>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-100">Qte</th>
+                                        <th class="text-uppercase text-secondary text-xs font-weight-bolder  ps-2">statut</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">date ajout</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">date cloture</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">motif cloture </th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">nom articles</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">prix totale</th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">valider commande </th>
+                                        <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder ">valider commande </th>
+
+
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                    </thead>
                                     <tbody>
 
-                                    <br>
-                                    <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{ path('list_article') }}">liste des  articles</a>
+
 
 
                                     </tbody>
                                 </table>
+                                &nbsp  &nbsp  &nbsp &nbsp &nbsp  il n'ya pas de commande valide pour cet article
+
+                                <br>
+                                <br>
+                                <a class="btn btn-outline-info btn-sm mb-0 me-3"  href="{{ path('list_article') }}">liste des  articles</a>
+
+
                             </div>
                         </div>
                     </div>

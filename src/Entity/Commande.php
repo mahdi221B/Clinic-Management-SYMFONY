@@ -27,7 +27,7 @@ class Commande
 
 
     #[ORM\Column(length: 255)]
-    private ?string $status = "a traté";
+    private ?string $status = "a trate";
 
 
 

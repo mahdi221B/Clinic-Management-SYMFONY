@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6749fd5390a45c565a5f72e2d65a599",
+    "content-hash": "3a3957a0b0b91505ea238e703e9b0000",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3640,10 +3640,10 @@
                 "issues": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/issues",
                 "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v6.2.9"
             },
+            "abandoned": "Symfony",
             "time": "2022-11-01T17:17:13+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "stella-maris/clock",
             "version": "0.1.7",
             "source": {
@@ -3691,8 +3691,6 @@
             "time": "2022-11-25T16:15:06+00:00"
         },
         {
-=======
->>>>>>> baha
             "name": "swiftmailer/swiftmailer",
             "version": "v6.3.0",
             "source": {
@@ -5427,7 +5425,6 @@
             "time": "2022-11-25T14:26:10+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "symfony/google-mailer",
             "version": "v5.4.8",
             "source": {
@@ -5500,17 +5497,6 @@
             },
             "dist": {
                 "type": "zip",
-=======
-            "name": "symfony/http-client",
-            "version": "v5.4.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/http-client.git",
-                "reference": "0f43af12a27733a060b92396b7bde84a4376da0a"
-            },
-            "dist": {
-                "type": "zip",
->>>>>>> baha
                 "url": "https://api.github.com/repos/symfony/http-client/zipball/0f43af12a27733a060b92396b7bde84a4376da0a",
                 "reference": "0f43af12a27733a060b92396b7bde84a4376da0a",
                 "shasum": ""
@@ -6019,7 +6005,6 @@
             "time": "2022-11-04T07:37:26+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "symfony/mercure",
             "version": "v0.6.2",
             "source": {
@@ -6265,17 +6250,6 @@
             },
             "dist": {
                 "type": "zip",
-=======
-            "name": "symfony/messenger",
-            "version": "v5.4.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/messenger.git",
-                "reference": "ead27c3bcb125799a249b430ca0540ee0b3a4504"
-            },
-            "dist": {
-                "type": "zip",
->>>>>>> baha
                 "url": "https://api.github.com/repos/symfony/messenger/zipball/ead27c3bcb125799a249b430ca0540ee0b3a4504",
                 "reference": "ead27c3bcb125799a249b430ca0540ee0b3a4504",
                 "shasum": ""
@@ -9306,16 +9280,16 @@
         },
         {
             "name": "symfony/ux-autocomplete",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-autocomplete.git",
-                "reference": "b0b4e0b7ccd4832823ae66a5a21b56a3776b3aaf"
+                "reference": "cba10095b07e2a4d6d1179f503a07c9f6e88c4e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/b0b4e0b7ccd4832823ae66a5a21b56a3776b3aaf",
-                "reference": "b0b4e0b7ccd4832823ae66a5a21b56a3776b3aaf",
+                "url": "https://api.github.com/repos/symfony/ux-autocomplete/zipball/cba10095b07e2a4d6d1179f503a07c9f6e88c4e3",
+                "reference": "cba10095b07e2a4d6d1179f503a07c9f6e88c4e3",
                 "shasum": ""
             },
             "require": {
@@ -9372,7 +9346,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-autocomplete/tree/v2.6.0"
+                "source": "https://github.com/symfony/ux-autocomplete/tree/v2.6.1"
             },
             "funding": [
                 {
@@ -9388,11 +9362,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-28T17:55:37+00:00"
+            "time": "2022-12-01T15:30:12+00:00"
         },
         {
             "name": "symfony/ux-dropzone",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-dropzone.git",
@@ -9449,7 +9423,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-dropzone/tree/v2.6.0"
+                "source": "https://github.com/symfony/ux-dropzone/tree/v2.6.1"
             },
             "funding": [
                 {
@@ -9469,7 +9443,7 @@
         },
         {
             "name": "symfony/ux-lazy-image",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-lazy-image.git",
@@ -9527,7 +9501,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-lazy-image/tree/v2.6.0"
+                "source": "https://github.com/symfony/ux-lazy-image/tree/v2.6.1"
             },
             "funding": [
                 {
@@ -9547,7 +9521,7 @@
         },
         {
             "name": "symfony/ux-notify",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-notify.git",
@@ -9609,7 +9583,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-notify/tree/v2.6.0"
+                "source": "https://github.com/symfony/ux-notify/tree/v2.6.1"
             },
             "funding": [
                 {
@@ -9629,7 +9603,7 @@
         },
         {
             "name": "symfony/ux-swup",
-            "version": "v2.6.0",
+            "version": "v2.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-swup.git",
@@ -9671,7 +9645,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-swup/tree/v2.6.0"
+                "source": "https://github.com/symfony/ux-swup/tree/v2.6.1"
             },
             "funding": [
                 {
@@ -10052,7 +10026,6 @@
             "time": "2022-01-02T09:53:40+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "symfony/webpack-encore-bundle",
             "version": "v1.16.0",
             "source": {
@@ -10135,17 +10108,6 @@
             },
             "dist": {
                 "type": "zip",
-=======
-            "name": "symfony/yaml",
-            "version": "v5.4.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/yaml.git",
-                "reference": "ebd37c71f62d5ec5f6e27de3e06fee492d4c6298"
-            },
-            "dist": {
-                "type": "zip",
->>>>>>> baha
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/ebd37c71f62d5ec5f6e27de3e06fee492d4c6298",
                 "reference": "ebd37c71f62d5ec5f6e27de3e06fee492d4c6298",
                 "shasum": ""
@@ -10210,7 +10172,6 @@
                 }
             ],
             "time": "2022-11-25T16:04:03+00:00"
-<<<<<<< HEAD
         },
         {
             "name": "tattali/calendar-bundle",
@@ -10275,8 +10236,6 @@
                 "source": "https://github.com/tattali/CalendarBundle/tree/v1.2.3"
             },
             "time": "2022-01-25T16:55:38+00:00"
-=======
->>>>>>> baha
         },
         {
             "name": "twig/extra-bundle",
@@ -10432,6 +10391,55 @@
                 }
             ],
             "time": "2022-09-28T08:42:51+00:00"
+        },
+        {
+            "name": "twilio/sdk",
+            "version": "6.43.4",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:twilio/twilio-php.git",
+                "reference": "805dd4890602542c98351921f50a664d89f782a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/805dd4890602542c98351921f50a664d89f782a0",
+                "reference": "805dd4890602542c98351921f50a664d89f782a0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "phpunit/phpunit": ">=7.0"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "src/Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "https://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "time": "2022-11-30T20:02:35+00:00"
         },
         {
             "name": "victor-prdh/recaptcha-bundle",
@@ -12541,16 +12549,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v6.1.8",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "c8163ef70aaa7011bff1a0ca60138d88249a54f3"
+                "reference": "1bd3b17db6d2ec284efbdc916600e880d6d858df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/c8163ef70aaa7011bff1a0ca60138d88249a54f3",
-                "reference": "c8163ef70aaa7011bff1a0ca60138d88249a54f3",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/1bd3b17db6d2ec284efbdc916600e880d6d858df",
+                "reference": "1bd3b17db6d2ec284efbdc916600e880d6d858df",
                 "shasum": ""
             },
             "require": {
@@ -12604,7 +12612,7 @@
             "description": "Provides utilities for PHPUnit, especially user deprecation notices management",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/phpunit-bridge/tree/v6.1.8"
+                "source": "https://github.com/symfony/phpunit-bridge/tree/v6.2.0"
             },
             "funding": [
                 {
@@ -12620,7 +12628,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-14T10:13:26+00:00"
+            "time": "2022-11-18T19:08:09+00:00"
         },
         {
             "name": "symfony/web-profiler-bundle",

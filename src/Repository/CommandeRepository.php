@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Repository;
+//require('vendor\autoload.php')  ;
 
 use App\Entity\Commande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Twilio\Rest\Client ;
 use Doctrine\Persistence\ManagerRegistry;
-use Twilio\Rest\Client;
 
 
 /**
@@ -65,19 +66,49 @@ class CommandeRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-/*
+
     public function sendsms(): void
     {
-        $sid = "AC2420083fb29a62edd5f592cfa12ac98f" ; //getenv("AC2420083fb29a62edd5f592cfa12ac98f");
-        $token = "c2daf4ab58d08620521e2471488640f5" ; //getenv("c2daf4ab58d08620521e2471488640f5");
-        $twilio = new Client($sid, $token);
+        $sid = "ACff096b193c1c973816cf724a9c445180" ;
+        $token = "1a05dcecbf89f071055d9ea6131946c7" ;
+        $client = new Client ($sid, $token);
 
-        $message = $twilio->messages
-            ->create("+21650700441", // to
-                ["body" => "votre commande est validé", "from" => "+12284600693"]
+        $message = $client->messages
+            ->create("+21654583665", // to
+                ["body" => "  votre  commande est validé , ", "from" => "+18654247150"]
             );
 
-        print($message->sid);
     }
-*/
+
+    public function commandebetdate($min,$max) :array {
+        $em = $this->getEntityManager();
+        $query = $em->createQuery('SELECT c FROM App\Entity\Commande c WHERE c.date_cloture BETWEEN :min AND :max')
+            ->setParameter('min',$min)
+            ->setParameter('max',$max);
+        return $query->getResult();
+    }
+
+    public function sendsms2(): void
+    {
+        $sid = "ACff096b193c1c973816cf724a9c445180" ;
+        $token = "1a05dcecbf89f071055d9ea6131946c7" ;
+        $client = new Client ($sid, $token);
+
+        $message = $client->messages
+            ->create("+21654583665", // to
+                ["body" => "  votre  commande est refusé  , ", "from" => "+18654247150"]
+            );
+
+    }
+
+    public function findByExampleField($value): array
+    {
+        return $this->createQueryBuilder('c')
+            ->andWhere('c.status = :valideé')
+            ->setParameter('valideé', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 }
