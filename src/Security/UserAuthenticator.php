@@ -93,7 +93,6 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             }
             return new RedirectResponse($this->urlGenerator->generate('user_role'));
         }
-
         return new RedirectResponse($this->urlGenerator->generate('app_back_office'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }

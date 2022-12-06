@@ -15,7 +15,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user')]
+    #[Route('/users', name: 'app_user')]
     public function index(UserRepository $repo): Response
     {
 
