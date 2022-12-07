@@ -1,0 +1,57 @@
+
+    <h1>pie chart :</h1>
+
+
+    <html>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js') }}"></script>
+    <body>
+
+
+
+
+
+
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js') }}"></script>
+    <script>
+
+
+
+
+
+        // var yValues = [cat[0], cat[1], cat[2], cat[3],cat[4] ];
+
+
+
+        var barColors = [
+            "#b91d47",
+            "#00aba9",
+            "#2b5797",
+            "#e8c3b9",
+            "#1e7145",
+            "#2b5471",
+            "#e845b9",
+            "#1e1445",
+
+        ];
+
+        new Chart("myChart", {
+            type: "pie",
+            data: {
+                labels: ["",""],
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: [0.4,0.6]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: "Resultat des Examens (positif/négatif)"
+                }
+            }
+        });
+    </script>
+
+    </body>
+    </html>

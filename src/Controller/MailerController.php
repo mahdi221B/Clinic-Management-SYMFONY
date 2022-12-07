@@ -7,8 +7,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 use App\Repository\CommentaireRepository;
-
-
 class MailerController extends AbstractController
 {
     #[Route('/mailer', name: 'app_mailer')]
@@ -18,6 +16,7 @@ class MailerController extends AbstractController
             'controller_name' => 'MailerController',
         ]);
     }
+
     #[Route('/email',name: "app_sendtopfan_mail")]
     public function sendEmail2(MailerInterface $mailer, CommentaireRepository $commentaireRepository): Response
     {
@@ -39,6 +38,19 @@ class MailerController extends AbstractController
         $email = (new Email())
             ->from('iclinique10@gmail.com')
             ->to('mahdi209208@gmail.com')
+            ->subject('Time for Symfony Mailer!')
+            ->text('Sending emails is fun again!')
+            ->html('<p>See Twig integration for better HTML integration!</p>');
+        $mailer->send($email);
+        return $this->renderForm('back-office/index-back.html.twig');
+    }
+
+    #[Route('/email3')]
+    public function sendEmail3(MailerInterface $mailer): Response
+    {
+        $email = (new Email())
+            ->from('acil.zaidi@esprit.tn')
+            ->to('acilazaidi@gmail.com')
             ->subject('Time for Symfony Mailer!')
             ->text('Sending emails is fun again!')
             ->html('<p>See Twig integration for better HTML integration!</p>');

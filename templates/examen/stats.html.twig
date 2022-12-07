@@ -1,0 +1,94 @@
+{% extends 'back-office/index-back.html.twig' %}
+
+{% block title %}Statistiques{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css') }}" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Statistiques</h1>
+        <canvas id="examens" width="400" height="100"></canvas>
+
+        <canvas id="annonces" width="400" height="100"></canvas>
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js') }}" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    <script>
+        function colorize(opaque, hover, ctx) {
+            const v = ctx.parsed;
+            const c = v < -50 ? '#D60000'
+                : v < 0 ? '#F46300'
+                    : v < 50 ? '#0358B6'
+                        : '#44DE28';
+
+            const opacity = hover ? 1 - Math.abs(v / 150) - 0.2 : 1 - Math.abs(v / 150);
+
+            return opaque ? c : Utils.transparentize(c, opacity);
+        }
+
+        function hoverColorize(ctx) {
+            return colorize(false, true, ctx);
+        }
+
+        const config = {
+            type: 'pie',
+            data: data,
+            options: {
+                plugins: {
+                    legend: false,
+                    tooltip: false,
+                },
+                elements: {
+                    arc: {
+                        backgroundColor: colorize.bind(null, false, false),
+                        hoverBackgroundColor: hoverColorize
+                    }
+                }
+            }
+        };
+        function generateData() {
+            return Utils.numbers({
+                count: DATA_COUNT,
+                min: -100,
+                max: 100
+            });
+        }
+
+        const data = {
+            datasets: [{
+                data: generateData()
+            }]
+        };
+        const DATA_COUNT = 5;
+        Utils.srand(110);
+
+        const actions = [
+            {
+                name: 'Randomize',
+                handler(chart) {
+                    chart.data.datasets.forEach(dataset => {
+                        dataset.data = generateData();
+                    });
+                    chart.update();
+                }
+            },
+            {
+                name: 'Toggle Doughnut View',
+                handler(chart) {
+                    if (chart.options.cutout) {
+                        chart.options.cutout = 0;
+                    } else {
+                        chart.options.cutout = '50%';
+                    }
+                    chart.update();
+                }
+            }
+        ];
+    </script>
+{% endblock %}
