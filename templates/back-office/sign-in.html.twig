@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('back-office/assets/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="{{asset('back-office/assets/img/favicon.png')}}">
   <title>
-    Soft UI Dashboard by Creative Tim
+    Sign-in
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -43,15 +43,15 @@
 
               </ul>
               <li class="nav-item d-flex align-items-center">
-                <a  class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" href="../pages/sign-up.html">
-                  Sign Up
+                <a  class="btn btn-round btn-sm mb-0 btn-outline-primary me-2" href="{{ path('app_front_office') }}">
+                  WebSite
                 </a>
               </li>
               <ul class="navbar-nav d-lg-block d-none">
                 <li class="nav-item">
-                  <a class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark" href="../pages/sign-in.html">
+                  <a class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark" href="{{ path('app_register') }}">
                     <i class="fas fa-key opacity-6 text-dark me-1"></i>
-                    Sign In
+                    Sign up
                   </a>
                 </li>
               </ul>
@@ -112,7 +112,7 @@
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     Don't have an account?
-                    <a href="javascript:;" class="text-info text-gradient font-weight-bold">Sign up</a>
+                    <a href="{{ path('app_register') }}" class="text-info text-gradient font-weight-bold">Sign up</a>
                   </p>
                 </div>
               </div>

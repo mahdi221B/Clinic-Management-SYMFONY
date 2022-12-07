@@ -2,41 +2,53 @@
 {% block menu %}
 
     <!-- ======= About Us Section ======= -->
+   {#  <section class="sect">
+        <div class="centered text">Moving clouds background animation.</div>
+    </section>#}
+
+    <!-- ======= Cta Section ======= -->
     <section>
         <div class="container">
-
             <div class="section-title">
-                <h2>Our events</h2>
+                <h2>Our top sponsors</h2>
                 <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
             </div>
 
-            <div class="row">
-                {% for i in categorie %}
-                    <div class="card2">
-                        <img src="{{asset('uploads/'~ i.picture)}}" alt=""/>
-
-                        <div class="content">
-                            <h2>{{ i.nom }}</h2>
-                            <p>
-                                <button><a href="{{path('app_frontby_eve',{'id':i.id}) }}" >See more...</a></button>
-                            </p>
-                            <br><br><br><br><br>
-                        </div>
+            <article class="wrapper">
+                <div class="marquee">
+                    <div class="marquee__group">
+                        {% for i in topsponors %}
+                            <img src="{{asset('uploads/'~ i.logo)}}" alt=""/>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                </div>
+            </article>
+        </div>
+    </section><!-- End Cta Section -->
+
+
+    <section id="departments" class="departments">
+        <div class="container" data-aos="fade-up">
+
+            <div class="section-title">
+                <h2>OUR EVENTS</h2>
             </div>
 
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+                {% for i in categorie %}
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <h4 style="text-align: center">{{ i.nom }}</h4>
+                    <p>Quis excepturi porro totam sint earum quo nulla perspiciatis eius.</p><br>
+                    <p style="text-align: center"><a  href="{{path('app_frontby_eve',{'id':i.id}) }}" >See more...</a></p>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="d-flex justify-content-center mt-6">
+                {% do categorie.setPageRange(4) %}
+                {{ knp_pagination_render(categorie,'pagination.html.twig') }}
+            </div>
         </div>
-        <div class="d-flex justify-content-center mt-6">
-            {% do categorie.setPageRange(4) %}
-            {{ knp_pagination_render(categorie,'pagination.html.twig') }}
-        </div>
-    </section>
-
-    <!-- ======= About Us Section ======= -->
-    <section class="sect">
-        <div class="centered text">Moving clouds background animation.</div>
-    </section>
+    </section><!-- End Departments Section -->
 
 
 {% endblock %}

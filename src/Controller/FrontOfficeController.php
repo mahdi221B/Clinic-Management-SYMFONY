@@ -78,9 +78,10 @@ class FrontOfficeController extends AbstractController
             'sponsors' => $sponsors
         ));
     }
-    #[Route('/categorie', name: 'app_front_spon')]
-    public function categorie(Request $request,PaginatorInterface $paginator, TypeEvenementRepository $typeEvenementRepository)
+    #[Route('/categorie', name: 'app_front_categ')]
+    public function categorie(Request $request,SponsorRepository $sponsorRepository,PaginatorInterface $paginator, TypeEvenementRepository $typeEvenementRepository)
     {
+        $topSponors= $sponsorRepository->topSponors();
         $categorie= $typeEvenementRepository->findAll();
         $pagination = $paginator->paginate(
             $categorie,
@@ -88,7 +89,8 @@ class FrontOfficeController extends AbstractController
             3
         );
         return $this->render('front-office/fontcate.html.twig', array(
-            'categorie' => $pagination
+            'categorie' => $pagination,
+            'topsponors' => $topSponors
         ));
     }
     #[Route('/backoffice', name: 'app_back_office')]

@@ -57,48 +57,33 @@ class SecurityUserController extends AbstractController
         $form = $this->createForm(FogotPasswordType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            $donnees = $form->getData();//
-
-
+            $donnees = $form->getData();
             $user = $userRepository->findOneBy(['Adresse'=>$donnees]);
             if(!$user) {
                 $this->addFlash('danger','cette adresse n\'existe pas');
                 return $this->redirectToRoute("forgot");
-
             }
             $token = $tokenGenerator->generateToken();
-
             try{
                 $user->setResetToken($token);
                 $entityManger = $this->getDoctrine()->getManager();
                 $entityManger->persist($user);
                 $entityManger->flush();
-
-
-
-
             }catch(\Exception $exception) {
                 $this->addFlash('warning','une erreur est survenue :'.$exception->getMessage());
                 return $this->redirectToRoute("app_login");
-
-
             }
-
             $url = $this->generateUrl('app_reset_password',array('token'=>$token),UrlGeneratorInterface::ABSOLUTE_URL);
-
             //BUNDLE MAILER
             $message = (new Swift_Message('Mot de password oublié'))
                 ->setFrom('bacem.mallek999@gmail.com')
                 ->setTo($user->getAdresse())
                 ->setBody("<p> Bonjour</p> unde demande de réinitialisation de mot de passe a été effectuée. Veuillez cliquer sur le lien suivant :".$url,
                     "text/html");
-
             //send mail
             $mailer->send($message);
             $this->addFlash('message','E-mail  de réinitialisation du mp envoyé :');
             //    return $this->redirectToRoute("app_login");
-
-
         }
 
         return $this->render("security/forgotPassword.html.twig",['form'=>$form->createView()]);

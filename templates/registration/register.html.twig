@@ -4,8 +4,87 @@
 
 {% block body %}
     <h1>Register</h1>
+    <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+                <tbody>
+                {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
 
-    {{ form_start(registrationForm) }}
+                <table>
+                    <tr>
+                        <td>{{ form_label(form.Nom,"Nom")}}</td>
+                        <td>{{ form_widget(form.Nom)}}</td>
+                        <td>{{ form_errors(form.Nom)}}</td>
+                        <td>{{ form_help(form.Nom)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_label(form.Prenom,"Prenom")}}</td>
+                        <td>{{ form_widget(form.Prenom)}}</td>
+                        <td>{{ form_errors(form.Prenom)}}</td>
+                        <td>{{ form_help(form.Prenom)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_label(form.Sexe,"Sexe")}}</td>
+                        <td>{{ form_widget(form.Sexe)}}</td>
+                        <td>{{ form_errors(form.Sexe)}}</td>
+                        <td>{{ form_help(form.Sexe)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_label(form.NumTel,"NumTel")}}</td>
+                        <td>{{ form_widget(form.NumTel)}}</td>
+                        <td>{{ form_errors(form.NumTel)}}</td>
+                        <td>{{ form_help(form.NumTel)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_label(form.Cin,"Cin")}}</td>
+                        <td>{{ form_widget(form.Cin)}}</td>
+                        <td>{{ form_errors(form.Cin)}}</td>
+                        <td>{{ form_help(form.Cin)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_label(form.Adresse,"Adresse")}}</td>
+                        <td>{{ form_widget(form.Adresse)}}</td>
+                        <td>{{ form_errors(form.Adresse)}}</td>
+                        <td>{{ form_help(form.Adresse)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_label(form.MotPasse,"")}}</td>
+                        <td>{{ form_widget(form.MotPasse)}}</td>
+                        <td>{{ form_errors(form.MotPasse)}}</td>
+                        <td>{{ form_help(form.MotPasse)}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>{{ form_label(form.Role,"Role")}}</td>
+                        <td>{{ form_widget(form.Role)}}</td>
+                        <td>{{ form_errors(form.Role)}}</td>
+                        <td>{{ form_help(form.Role)}}</td>
+                    </tr>
+
+
+                </table>
+
+
+                {{ form_end(form) }}
+
+                </tbody>
+            </table>
+
+
+                {{ form_end(form) }}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {#   {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.Adresse) }}
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
@@ -13,5 +92,5 @@
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
 {% endblock %}

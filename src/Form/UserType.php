@@ -18,7 +18,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom',\Symfony\Component\Form\Extension\Core\Type\TextType::class,['label'=>'Nom',
+            ->add('Nom',TextType::class,['label'=>'Nom',
                 'attr'=>[
                     'placeholder'=>'nom de utilisateur'
                 ]])
