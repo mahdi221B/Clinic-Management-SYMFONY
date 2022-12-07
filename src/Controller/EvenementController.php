@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Evenement;
 use App\Form\EvenementType;
+use App\Repository\UserRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\SponsorRepository;
 use App\service\PdfService;
@@ -38,13 +39,15 @@ class EvenementController extends AbstractController
     }
 
     #[Route('/new', name: 'app_evenement_new')]
-    public function new(Request $request,ManagerRegistry $managerRegistry, EvenementRepository $evenementRepository)
+    public function new(Request $request,UserRepository $userRepository,ManagerRegistry $managerRegistry, EvenementRepository $evenementRepository)
     {
         $evenement = new Evenement();
         $form = $this->createForm(EvenementType::class, $evenement);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $image= $request -> files->get ('evenement')['picture'];
+            $user_id= (int)$request ->get ('evenement')['user'];
+            $user = $userRepository->find($user_id);
             $uploads_directory= $this->getParameter('uploads_directory');
             $filename =md5(uniqid()) . '.' . $image ->guessExtension();
             $image ->move(
@@ -53,6 +56,9 @@ class EvenementController extends AbstractController
             );
             $evenement->setPicture($filename);
             $evenement->setMontantRecole(0);
+            $evenement->setPhoneOrganisateur($user->getNumTel());
+            $evenement->setNomOrganisateur($user->getPrenom().' '.$user->getNom());
+            $evenement->setEmailOrganisateur($user->getAdresse());
             $em = $managerRegistry->getManager();
             $em->persist($evenement);
             $em->flush();

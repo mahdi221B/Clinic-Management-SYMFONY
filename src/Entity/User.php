@@ -100,11 +100,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $reset_token = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Evenement::class)]
+    private Collection $evenements;
+
 
 
     public function __construct()
     {
         $this->absences = new ArrayCollection();
+        $this->evenements = new ArrayCollection();
     }
 
 
@@ -293,6 +297,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setResetToken(string $reset_token): self
     {
         $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Evenement>
+     */
+    public function getEvenements(): Collection
+    {
+        return $this->evenements;
+    }
+
+    public function addEvenement(Evenement $evenement): self
+    {
+        if (!$this->evenements->contains($evenement)) {
+            $this->evenements->add($evenement);
+            $evenement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEvenement(Evenement $evenement): self
+    {
+        if ($this->evenements->removeElement($evenement)) {
+            // set the owning side to null (unless already changed)
+            if ($evenement->getUser() === $this) {
+                $evenement->setUser(null);
+            }
+        }
 
         return $this;
     }

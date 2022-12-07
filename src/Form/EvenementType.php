@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use App\Entity\Evenement;
 use App\Entity\TypeEvenement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -20,9 +21,14 @@ class EvenementType extends AbstractType
             ->add('titre')
             ->add('description')
             ->add('lieu')
-            ->add('nom_organisateur')
-            ->add('email_organisateur')
-            ->add('phone_organisateur')
+            ->add('user',EntityType::class,array(
+                'class'=>User::class,
+                'choice_label'=>'nom',
+                'autocomplete' => true
+            ))
+            //->add('nom_organisateur')
+            //->add('email_organisateur')
+            //->add('phone_organisateur')
             ->add('date_debut')
             ->add('date_fin')
             ->add('picture', DropzoneType::class, array('data_class' => null))
@@ -30,7 +36,6 @@ class EvenementType extends AbstractType
                 'class'=>TypeEvenement::class,
                 'choice_label'=>'nom',
                 'autocomplete' => true
-
             ))
             ->add('submit',SubmitType::class)
         ;

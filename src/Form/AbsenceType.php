@@ -17,16 +17,10 @@ class AbsenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom',\Symfony\Component\Form\Extension\Core\Type\TextType::class,['label'=>'Nom',
-                'attr'=>[
-                    'placeholder'=>'nom de utilisateur'
-                ]])
-            ->add('Prenom',\Symfony\Component\Form\Extension\Core\Type\TextType::class,['label'=>'Prenom',
-                'attr'=>[
-                    'placeholder'=>'Prenom de utilisateur'
-                ]])
-            ->add('DateAbsence'
-            )
+            ->add('user',EntityType::class,array(
+                'class'=>User::class,
+                'choice_label'=>'nom'))
+            ->add('DateAbsence')
             ->add('DureAbsence',\Symfony\Component\Form\Extension\Core\Type\TextType::class,['label'=>'DureAbsence',
                 'attr'=>[
                     'placeholder'=>'Dure de Absence'
@@ -35,9 +29,6 @@ class AbsenceType extends AbstractType
                 'attr'=>[
                     'placeholder'=>'Justification'
                 ]])
-            ->add('user',EntityType::class,array(
-                'class'=>User::class,
-                'choice_label'=>'id'))
           //  ->add('Ajout',SubmitType::class)
         ;
     }

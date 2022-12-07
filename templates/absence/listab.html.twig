@@ -139,15 +139,11 @@
                                 <table class="table align-items-center mb-0">
                                     <thead>
                                     <tr>
-
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">user_id</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">nom</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">prenom</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">date_absence</th>
-
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">dure_absence</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">justification</th>
-
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Update</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Delete</th>
                                         <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">detail</th>
@@ -158,9 +154,6 @@
 
                                     {% for i in c %}
                                         <tr>
-                                            <td class="align-middle text-center">
-                                                <span class="text-secondary text-xs font-weight-bold">{{ i.user.id }}</span>
-                                            </td>
                                             <td class="align-middle text-center">
                                                 <span class="text-secondary text-xs font-weight-bold">{{ i.nom }}</span>
                                             </td>
@@ -193,8 +186,6 @@
                     </div>
                 </div>
             </div>
-            <a href="{{ path('affiche') }}">Back to table User</a>
-
             <footer class="footer pt-3  ">
                 <a href="{{ path('app_logout') }}">logOut</a>
                 <div class="container-fluid">

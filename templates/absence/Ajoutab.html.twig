@@ -137,54 +137,33 @@
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <tbody>
-
                                     {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
-
                                     <table>
                                         <tr>
-                                            <td>{{ form_label(form.Nom,"Nom")}}</td>
-                                            <td>{{ form_widget(form.Nom)}}</td>
-                                            <td>{{ form_errors(form.Nom)}}</td>
-                                            <td>{{ form_help(form.Nom)}}</td>
+                                            <td>{{ form_label(form.user,"Nom Utilisateur")}}</td>
+                                            <td>{{ form_widget(form.user)}}</td>
+                                            <td>{{ form_errors(form.user)}}</td>
+                                            <td>{{ form_help(form.user)}}</td>
                                         </tr>
-
-                                        <tr>
-                                            <td>{{ form_label(form.Prenom,"Prenom")}}</td>
-                                            <td>{{ form_widget(form.Prenom)}}</td>
-                                            <td>{{ form_errors(form.Prenom)}}</td>
-                                            <td>{{ form_help(form.Prenom)}}</td>
-                                        </tr>
-
                                         <tr>
                                             <td>{{ form_label(form.DateAbsence,"Date Absence")}}</td>
                                             <td>{{ form_widget(form.DateAbsence)}}</td>
                                             <td>{{ form_errors(form.DateAbsence)}}</td>
                                             <td>{{ form_help(form.DateAbsence)}}</td>
                                         </tr>
-
                                         <tr>
                                             <td>{{ form_label(form.DureAbsence,"DureAbsence")}}</td>
                                             <td>{{ form_widget(form.DureAbsence)}}</td>
                                             <td>{{ form_errors(form.DureAbsence)}}</td>
                                             <td>{{ form_help(form.DureAbsence)}}</td>
                                         </tr>
-
                                         <tr>
                                             <td>{{ form_label(form.Justification,"Justification")}}</td>
                                             <td>{{ form_widget(form.Justification)}}</td>
                                             <td>{{ form_errors(form.Justification)}}</td>
                                             <td>{{ form_help(form.Justification)}}</td>
                                         </tr>
-
-                                        <tr>
-                                            <td>{{ form_label(form.user,"id user")}}</td>
-                                            <td>{{ form_widget(form.user)}}</td>
-                                            <td>{{ form_errors(form.user)}}</td>
-                                            <td>{{ form_help(form.user)}}</td>
-                                        </tr>
-
                                     </table>
-
                                     {{ form_end(form) }}
                                     <a href="{{ path('listab') }}">back to list</a>
                                     </tbody>

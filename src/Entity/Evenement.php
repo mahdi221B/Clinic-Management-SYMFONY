@@ -31,17 +31,13 @@ class Evenement
     #[Assert\NotBlank(message:"Champ vide")]
     private ?string $lieu = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"Champ vide")]
+    #[ORM\Column]
     private ?string $nom_organisateur = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"Champ vide")]
-    #[Assert\Email(message:"Ce E-mail '{{ value }}' est non valide ")]
+    #[ORM\Column]
     private ?string $email_organisateur = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"Champ vide")]
     private ?int $phone_organisateur = null;
 
     #[ORM\Column(length: 255)]
@@ -58,15 +54,18 @@ class Evenement
     private ?int $montant_recole = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\NotBlank(message:"You have to add a picture")]
+    #[Assert\NotBlank(message:"Champ vide")]
     private ?string $picture = null;
 
     #[ORM\ManyToOne(inversedBy: 'evenements')]
     #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?TypeEvenement $typeEvenement = null;
 
-    #[ORM\OneToMany(mappedBy: 'listeevents', targetEntity: Donation::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'listeevents', targetEntity: Donation::class,orphanRemoval: true)]
     private Collection $donations;
+
+    #[ORM\ManyToOne(inversedBy: 'evenements')]
+    private ?User $user = null;
 
 
 
@@ -240,6 +239,18 @@ class Evenement
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

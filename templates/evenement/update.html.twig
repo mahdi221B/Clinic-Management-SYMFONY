@@ -128,15 +128,16 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <a href="{{ path('app_evenement_new') }}">Add</a>
-
-                            <h6>Table d'événements</h6>
+                            <div class="card-header pb-0 col-6">
+                                <a class="btn bg-gradient-dark mb-0" href="{{ path('app_evenement_index') }}"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Retour</a>
+                            </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
                                     <tbody>
-                                    {{ form_start(form ) }}
+
+                                    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
                                     <table>
                                         <tr>
                                             <td>{{ form_label(form.titre,"Titre")}}</td>
@@ -159,26 +160,7 @@
                                             <td>{{ form_help(form.lieu)}}</td>
                                         </tr>
 
-                                        <tr>
-                                            <td>{{ form_label(form.nom_organisateur,"Nom Organisateur")}}</td>
-                                            <td>{{ form_widget(form.nom_organisateur)}}</td>
-                                            <td>{{ form_errors(form.nom_organisateur)}}</td>
-                                            <td>{{ form_help(form.nom_organisateur)}}</td>
-                                        </tr>
 
-                                        <tr>
-                                            <td>{{ form_label(form.email_organisateur,"E-mail Organisateur")}}</td>
-                                            <td>{{ form_widget(form.email_organisateur)}}</td>
-                                            <td>{{ form_errors(form.email_organisateur)}}</td>
-                                            <td>{{ form_help(form.email_organisateur)}}</td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>{{ form_label(form.phone_organisateur,"Téléphone")}}</td>
-                                            <td>{{ form_widget(form.phone_organisateur)}}</td>
-                                            <td>{{ form_errors(form.phone_organisateur)}}</td>
-                                            <td>{{ form_help(form.phone_organisateur)}}</td>
-                                        </tr>
 
                                         <tr>
                                             <td>{{ form_label(form.date_debut,"Date début")}}</td>

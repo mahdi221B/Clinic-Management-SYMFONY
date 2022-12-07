@@ -13,31 +13,10 @@ class Absence
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-
-    #[Assert\NotNull]
-    #[Assert\Length(
-        min: 2,
-        max: 10,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
-    )]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $Nom = null;
-
-
-    #[Assert\NotNull]
-    #[Assert\Length(
-        min: 2,
-        max: 10,
-        minMessage: 'Your last name must be at least {{ limit }} characters long',
-        maxMessage: 'Your last name cannot be longer than {{ limit }} characters',
-    )]
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $Prenom = null;
-
-
-
     #[Assert\NotNull]
     #[Assert\Date]
     #[ORM\Column(length: 255)]

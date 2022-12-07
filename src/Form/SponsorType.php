@@ -19,7 +19,8 @@ class SponsorType extends AbstractType
             ->add('phone_societe')
             ->add('montant_donnee')
             ->add('type_sponsoring')
-            ->add('logo', DropzoneType::class)
+            ->add('logo', DropzoneType::class, array('data_class' => null))
+
             //  ->add('evenements')
           ->add('submit',SubmitType::class, ['label' => 'Enregistrer'])
 

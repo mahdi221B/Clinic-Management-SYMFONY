@@ -18,14 +18,12 @@ class UserController extends AbstractController
     #[Route('/users', name: 'app_user')]
     public function index(UserRepository $repo): Response
     {
-
         $securityContext = $this->container->get('security.authorization_checker');
         if ($securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             $user=$repo->findAll();
             return $this->render('User/Affiche.html.twig',
                 ['c'=>$user]);
         }
-
         return $this->redirectToRoute('app_login');
         return $this->render('security/login.html.twig', ['error' => '',
             'controller_name' => 'UserController',
@@ -56,7 +54,7 @@ class UserController extends AbstractController
 
 
     }
-    #[Route('/admin/affiche', name: 'affiche')]
+    #[Route('/admin/affiche', name: 'affiche_route')]
     function Affiche(UserRepository $repo){
         //request select * from Classroom
         // $rep=$this->getDoctrine()->getRepository(Classroom::class);

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Absence;
 use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Form\AbsenceType;
 use App\Form\UserType;
 use App\Repository\AbsenceRepository;
@@ -29,12 +30,18 @@ class AbsenceController extends AbstractController
     }
 
     #[Route('/admin/absence/ajout', name: 'Ajab')]
-    function ajoutab(Request $request,ManagerRegistry $managerRegistry){
+    function ajoutab(Request $request,ManagerRegistry $managerRegistry,UserRepository $userRepository){
         $Absence=new Absence();
         $form=$this->createForm(AbsenceType::class,$Absence);
         $form->add('Ajout', SubmitType::class);
         $form->handleRequest($request);
         if($form->isSubmitted() &&$form->isValid() ){
+            $id_user =(int)$request->get('absence')['user'];
+            $user = $userRepository->find($id_user);
+            $prenom_user = $user->getPrenom();
+            $nom_user = $user->getNom();
+            $Absence->setNom($nom_user);
+            $Absence->setPrenom($prenom_user);
             $em=$managerRegistry->getManager();
             $em->persist($Absence);
             $em->flush();
