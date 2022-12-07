@@ -1,0 +1,41 @@
+.sect{
+    height:400px;
+    background-color:#BFDFEC;
+    background-repeat:repeat-x;
+    background-image:url("https://i.stack.imgur.com/b7z29.png");
+    animation: movement 10s linear infinite;
+}
+
+@keyframes movement{
+    0% {
+        background-position:0px 0px;
+    }
+    100%{
+        background-position:560px 0px;
+    }
+}
+
+.text{
+    font-size:2rem;
+    text-align:center;
+    color:white;
+    border:1px solid white;
+    padding:2rem;
+    border-radius:5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centered {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    margin-top: -50px;
+    margin-left: -100px;
+    font-size:2rem;
+    text-align:center;
+    color:white;
+    border:1px solid white;
+    padding:2rem;
+
+}
