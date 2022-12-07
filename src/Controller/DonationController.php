@@ -6,6 +6,7 @@ use App\Entity\Donation;
 use App\Entity\Evenement;
 use App\Form\DonationType;
 use App\Form\EvenementType;
+use App\Repository\BudgetRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\SponsorRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,7 +30,7 @@ class DonationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_donation')]
-    public function add (PaginatorInterface $paginator,$id,MailerInterface $mailer,SponsorRepository $sponsorRepository,EvenementRepository $evenementRepository,Request $request,ManagerRegistry $managerRegistry)
+    public function add (BudgetRepository $BudgetRepository,PaginatorInterface $paginator,$id,MailerInterface $mailer,SponsorRepository $sponsorRepository,EvenementRepository $evenementRepository,Request $request,ManagerRegistry $managerRegistry)
     {
         $evenements= $evenementRepository->findAll();
         $pagination = $paginator->paginate(
@@ -43,7 +44,10 @@ class DonationController extends AbstractController
         $form = $this->createForm(DonationType::class, $donation);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $budget =$BudgetRepository->find(1);
+            $oldbudg=$budget->getMontant();
             $montant = (int)$request->request->get('donation')['montants'];
+            $budget->setMontant($oldbudg+$montant);
             $event->setMontantRecole($evenementRepository->getDon($id)+$montant);
             $donation->setCreatedAt(new \DateTimeImmutable());
             $donation->setListeevents($event);

@@ -15,7 +15,7 @@ class ArticlesType extends AbstractType
     {
         $builder
             ->add('nom_articles')
-            ->add('qte')
+            //->add('qte')
             ->add('description')
             ->add('type',ChoiceType::class, [
                 'choices'  => [
@@ -30,7 +30,7 @@ class ArticlesType extends AbstractType
                 ]],)
             ->add('prix')
             //->add('commandes')
-            ->add("ajouterarticles",SubmitType::class)
+            ->add("Ajouter",SubmitType::class)
 
         ;
     }

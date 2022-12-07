@@ -179,37 +179,22 @@
                                             </td>
 
                                             {% if i.status == 'validee' %}
-                                                <td class="align-middle text-center">
-
-                                                    <p>Jawek behy</p>
-
-                                                </td>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <p>Jawek behy</p>
-
+                                                <td colspan="2" >
+                                                    <p>Validé</p>
                                                 </td>
                                             {% elseif i.status == 'a trate' %}
                                                 <td class="align-middle text-center">
-
-                                                    <a class="btn btn-outline-success    btn-sm mb-0 me-3"  href="{{ path('confirm_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">valider commande</a>
+                                                    <a class="btn btn-outline-success    btn-sm mb-0 me-3"  href="{{ path('confirm_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">Valider</a>
 
                                                 </td>
                                                 </td>
                                                 <td class="align-middle text-center">
-                                                    <a class="btn btn-outline-danger    btn-sm mb-0 me-3"  href="{{ path('refuse_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">refuser commande</a>
+                                                    <a class="btn btn-outline-danger    btn-sm mb-0 me-3"  href="{{ path('refuse_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">Refuser</a>
 
                                                 </td>
                                             {% else  %}
                                                 <td class="align-middle text-center">
-
-                                                    <p>refusee</p>
-
-                                                </td>
-                                                </td>
-                                                <td class="align-middle text-center">
-                                                    <p>refusee</p>
-
+                                                    <p>Refusé</p>
                                                 </td>
                                             {% endif  %}
 
@@ -224,20 +209,6 @@
 
                                     </tbody>
                                 </table>
-                                &nbsp  &nbsp  &nbsp &nbsp &nbsp  <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder "> budget totale : </th>
-
-                                {% for c in budget  %}
-                                    <tr>
-
-                                        <td class="align-middle text-center">
-                                           <span class="text-secondary text-s font-weight-bold">{{ c.Montant }}</span>
-                                        </td>
-
-
-
-                                    </tr>
-
-                                {% endfor %}
                             </div>
                         </div>
                     </div>

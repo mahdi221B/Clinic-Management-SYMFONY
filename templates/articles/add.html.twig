@@ -144,13 +144,6 @@
                                             <td>{{ form_errors(form.nom_articles)}}</td>
                                             <td>{{ form_help(form.nom_articles)}}</td>
                                         </tr>
-
-                                        <tr>
-                                            <td>{{ form_label(form.qte,"qte")}}</td>
-                                            <td>{{ form_widget(form.qte)}}</td>
-                                            <td>{{ form_errors(form.qte)}}</td>
-                                            <td>{{ form_help(form.qte)}}</td>
-                                        </tr>
                                         <tr>
                                             <td>{{ form_label(form.description,"description")}}</td>
                                             <td>{{ form_widget(form.description)}}</td>
@@ -182,7 +175,7 @@
 
                                     {{ form_end(form) }}
                                     <br>
-                                    <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{ path('list_article') }}">liste des  articles</a>
+                                    <a class="btn btn-outline-primary btn-sm mb-0 me-3"  href="{{ path('list_article') }}">Retour</a>
 
 
                                     </tbody>

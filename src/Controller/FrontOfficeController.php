@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Evenement;
+use App\Repository\BudgetRepository;
 use App\Repository\EvenementRepository;
 use App\Repository\SponsorRepository;
 use App\Repository\TypeEvenementRepository;
@@ -94,14 +95,16 @@ class FrontOfficeController extends AbstractController
         ));
     }
     #[Route('/backoffice', name: 'app_back_office')]
-    public function backofficeindex(EvenementRepository $evenementRepository)
+    public function backofficeindex(EvenementRepository $evenementRepository,BudgetRepository $BudgetRepository)
     {
+        $budget =$BudgetRepository->findAll();
         $totalDon = $evenementRepository->gettotalDon();
         $topEve = $evenementRepository->gettopDonName();
 
         return $this->render('back-office/dashbord.html.twig',array('totalDon'=>$totalDon,
-            'topEve'=>$topEve
-            ));
+            'topEve'=>$topEve,
+            "budget"=>$budget
+        ));
     }
     #[Route('/qrcode/{id}', name: 'app_qr_test')]
     public function qrcode($id,EvenementRepository $evenementRepository,QrcodeService $qrcodeService)

@@ -57,17 +57,22 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $commande = $CommandeRepository->find($id);
         $budget =  $BudgetRepository->findOneBy(['id'=> '1' ]);
         $newFormat=date("d-m-Y",strtotime("now"));
-        $commande->getArticles()->setQte($commande->getQteC()+$commande->getArticles()->getQte());
-        $commande->setDateCloture($newFormat);
-        $commande->setStatus("validee");
-        $commande->setDateCloture($newFormat);
-        $commande->setMotifCloture("cloturé avec suceé");
-        $budget->setMontant($budget->getMontant()-$commande->getPrixC() );
-        $em = $managerRegistry->getManager();
-        $em -> persist($commande);
-        $em->flush();
-        $CommandeRepository->sendsms();
-        return $this->redirectToRoute("list_commande");
+        if ($commande->getPrixC() > $budget->getMontant()){
+
+            return $this->renderForm('articles/error.html.twig');
+
+        }else{
+            $commande->getArticles()->setQte($commande->getQteC()+$commande->getArticles()->getQte());
+            $commande->setDateCloture($newFormat);
+            $commande->setStatus("validee");
+            $commande->setDateCloture($newFormat);
+            $commande->setMotifCloture("cloturé avec suceé");
+            $budget->setMontant($budget->getMontant()-$commande->getPrixC() );
+            $em = $managerRegistry->getManager();
+            $em -> persist($commande);
+            $em->flush();
+            $CommandeRepository->sendsms();
+            return $this->redirectToRoute("list_commande");}
     }
 
 

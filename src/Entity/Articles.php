@@ -18,14 +18,10 @@ class   Articles
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-
     private ?string $nom_articles = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message:"Champ vide")]
-    #[Assert\Positive(message:"doit etre poitive")]
-
-    private ?int $qte = null;
+    private ?int $qte = 0;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Champ vide")]
