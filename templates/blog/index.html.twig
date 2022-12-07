@@ -1,0 +1,429 @@
+
+
+
+
+{% block title  %} Hello {{ controller_name }} ! {% endblock %}
+
+
+{% block body %}
+
+
+
+
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Medicio Bootstrap Template - Index</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{{asset('front-office/assets/img/favicon.png')}}" rel="icon">
+    <link href="{{asset('front-office/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{asset('front-office/assets/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front-office/assets/vendor/animate.css/animate.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front-office/assets/vendor/aos/aos.css')}}" rel="stylesheet">
+    <link href="{{asset('front-office/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front-office/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{asset('front-office/assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front-office/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+    <link href="{{asset('front-office/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{{asset('front-office/assets/css/style.css')}}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ======= Top Bar ======= -->
+<div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
+        <div class="align-items-center d-none d-md-flex">
+            <i class="bi bi-clock"></i> Monday - Saturday, 8AM to 10PM
+        </div>
+        <div class="d-flex align-items-center">
+            <i class="bi bi-phone"></i> Call us now +1 5589 55488 55
+        </div>
+    </div>
+</div>
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+
+        <a href="index.html" class="logo me-auto"><img src="{{asset('front-office/assets/img/logo.png')}}" alt=""></a>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <h1 class="logo me-auto"><a href="index.html">Medicio</a></h1> -->
+
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a class="nav-link scrollto " href="{{ path('home') }}">Home</a></li>
+                <li><a class="nav-link scrollto" href="{{ path('app_categorie_new') }}">Add Categorie</a></li>
+                <li><a class="nav-link scrollto" href="{{ path('app_categorie_index') }}">Categories</a></li>
+                <li><a class="nav-link scrollto" href="{{ path('blog') }}">Posts</a></li>
+                <li><a class="nav-link scrollto" href="{{ path('blog_create') }}">Creer un post</a></li>
+                <li><a class="nav-link scrollto" href="{{ path('app_sendtopfan_mail') }}">Send mail to our top fan <span class="emoji round">🏆</span></a></li>
+                <li><a class="nav-link scrollto" href="{{ path('app_prize') }}">play and win 🎮 </a></li>
+
+        </nav><!-- .navbar -->
+
+
+
+    </div>
+</header>
+
+<section>
+{%for i in posts %}
+
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <!-- Code by Angela Delise
+       https://codepen.io/angeladelise/pen/Bajdvav
+      -->
+
+    </head>
+
+    <body>
+
+    <div class="wrapper">
+        <div class="card">
+            <div class="card-banner">
+                <p class="category-tag popular">Popular</p>
+                <img class="banner-img" src="{{ i.image }}" alt= "">
+            </div>
+
+
+
+
+
+            <div class="card-body">
+
+                <p class="blog-hashtag">#ECLINIQUE</p>
+                <h2 class="blog-title">{{ i.title}}</h2>
+                <p class="blog-description">{{ i.Text|raw }}</p>
+
+
+                <div class="card-profile">
+                    <a href ="{{ path('blog_show',{'id':i.id}) }}" class=" btn btn-primary"> lire la suite</a>
+                    <!DOCTYPE html>
+                    <html lang="en">
+
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>note</title>
+                        <style>
+                            .star {
+                                font-size: 1.5rem;
+                            }
+
+                            .hover {
+                                color: rgb(255, 196, 0);
+                            }
+                        </style>
+                    </head>
+
+                    <body>
+
+                    <i class="star" data-note="1">&#9733;</i>
+                    <i class="star" data-note="2">&#9733;</i>
+                    <i class="star" data-note="3">&#9733;</i>
+                    <i class="star" data-note="4">&#9733;</i>
+                    <i class="star" data-note="5">&#9733;</i>
+                    <i class="note">Note:</i>
+                    <script>
+                        const stars = document.querySelectorAll('.star');
+                        let check = false;
+                        stars.forEach(star => {
+                            star.addEventListener('mouseover', selectStars);
+                            star.addEventListener('mouseleave', unselectStars);
+                            star.addEventListener('click', activeSelect);
+                        })
+
+                        function selectStars(e) {
+                            const data = e.target;
+                            const etoiles = priviousSiblings(data);
+                            if (!check) {
+                                etoiles.forEach(etoile => {
+                                    etoile.classList.add('hover');
+                                })
+                            }
+
+                        }
+
+                        function unselectStars(e) {
+                            const data = e.target;
+                            const etoiles = priviousSiblings(data);
+                            if (!check) {
+                                etoiles.forEach(etoile => {
+                                    etoile.classList.remove('hover');
+                                })
+                            }
+                        }
+
+                        function activeSelect(e) {
+                            if (!check) {
+                                check = true;
+                                document.querySelector('.note').innerHTML = 'Note ' + e.target.dataset.note;
+                            }
+                        }
+
+                        function priviousSiblings(data) {
+                            let values = [data];
+                            while (data = data.previousSibling) {
+                                if (data.nodeName === 'I') {
+                                    values.push(data);
+                                }
+                            }
+                            return values;
+                        }
+                    </script>
+
+                    </body>
+
+                    </html>
+
+
+                </div>
+            </div>
+        </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    </body>
+
+
+
+
+
+
+
+
+
+    <style>
+        :root {
+            --clr-gray-light: #d7dfe2;
+            --clr-gray-med: #616b74;
+            --clr-gray-dark: #414b56;
+            --clr-link: #4d97b2;
+            --clr-popular: #ef257a;
+            --clr-technology: #651fff;
+            --clr-psychology: #e85808;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: "Inter", sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            margin: 2rem;
+            color: var(--clr-gray-dark);
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card {
+            overflow: hidden;
+            box-shadow: 0px 2px 20px var(--clr-gray-light);
+            background: white;
+            border-radius: 0.5rem;
+            position: relative;
+            width: 350px;
+            margin: 1rem;
+            transition: 250ms all ease-in-out;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 2px 40px var(--clr-gray-light);
+        }
+
+        .banner-img {
+            position: absolute;
+            object-fit: cover;
+            height: 14rem;
+            width: 100%;
+        }
+
+        .category-tag {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            background: red;
+            padding: 0.5rem 1.3rem 0.5rem 1rem;
+            text-transform: uppercase;
+            position: absolute;
+            z-index: 1;
+            top: 1rem;
+            border-radius: 0 2rem 2rem 0;
+        }
+
+        .popular {
+            background: var(--clr-popular);
+        }
+
+        .technology {
+            background: var(--clr-technology);
+        }
+
+        .psychology {
+            background: var(--clr-psychology);
+        }
+
+        .card-body {
+            margin: 15rem 1rem 1rem 1rem;
+        }
+
+        .blog-hashtag {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--clr-link);
+        }
+
+        .blog-title {
+            line-height: 1.5rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .blog-description {
+            color: var(--clr-gray-med);
+            font-size: 0.9rem;
+        }
+
+        .card-profile {
+            display: flex;
+            margin-top: 2rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .card-profile-info {
+            margin-left: 1rem;
+        }
+
+        .profile-name {
+            font-size: 1rem;
+        }
+
+        .profile-followers {
+            color: var(--clr-gray-med);
+            font-size: 0.9rem;
+        }
+
+    </style>
+
+
+
+
+        </post>
+
+
+
+
+{% endfor %}
+
+    <div class="d-flex justify-content-center mt-6">
+        {% do posts.setPageRange(4) %}
+        {{ knp_pagination_render(posts) }}
+    </div>
+    </section>
+</section>
+<main id="main">
+
+    <!-- ======= Featured Services Section ======= -->
+    <section id="featured-services" class="featured-services">
+        <div class="container" data-aos="fade-up">
+
+            <div class="row">
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon"><i class="fas fa-heartbeat"></i></div>
+                        <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                        <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon"><i class="fas fa-pills"></i></div>
+                        <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+                        <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon"><i class="fas fa-thermometer"></i></div>
+                        <h4 class="title"><a href="">Magni Dolores</a></h4>
+                        <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                    <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon"><i class="fas fa-dna"></i></div>
+                        <h4 class="title"><a href="">Nemo Enim</a></h4>
+                        <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Featured Services Section -->
+
+    <!-- ======= Cta Section ======= -->
+    <section id="cta" class="cta">
+        <div class="container" data-aos="zoom-in">
+
+            <div class="text-center">
+                <h3>In an emergency? Need help now?</h3>
+                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <a class="cta-btn scrollto" href="#appointment">Make an Make an Appointment</a>
+            </div>
+
+        </div>
+
+    </section><!-- End Cta Section -->
+
+    <!-- ======= About Us Section ======= -->
+
+</body>
+
+</html>
+
+{% endblock %}

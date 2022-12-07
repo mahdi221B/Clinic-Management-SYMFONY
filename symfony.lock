@@ -62,6 +62,15 @@
             "./config/packages/karser_recaptcha3.yaml"
         ]
     },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "f5ad42002183a6881962683e6d84bbb25cdfce5d"
+        }
+    },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.9.0"
     },
@@ -334,6 +343,9 @@
     "symfony/ux-notify": {
         "version": "v2.5.0"
     },
+    "symfony/ux-chartjs": {
+        "version": "v2.6.0"
+    },
     "symfony/validator": {
         "version": "5.4",
         "recipe": {
@@ -391,17 +403,17 @@
         ]
     },
     "tattali/calendar-bundle": {
-        "version": "1.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "main",
-            "version": "1.1",
-            "ref": "0c643e17b5340747b35c2c75e11727fa31bfa9bb"
+            "version": "1.2",
+            "recipe": {
+                "repo": "github.com/symfony/recipes-contrib",
+                "branch": "main",
+                "version": "1.1",
+                "ref": "0c643e17b5340747b35c2c75e11727fa31bfa9bb"
+            },
+            "files": [
+                "./config/routes/calendar.yaml"
+            ]
         },
-        "files": [
-            "./config/routes/calendar.yaml"
-        ]
-    },
     "twig/extra-bundle": {
         "version": "v3.4.0"
     },
