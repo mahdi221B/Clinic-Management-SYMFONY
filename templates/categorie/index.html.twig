@@ -1,10 +1,4 @@
-
-
-
-
-{% block body %}
-
-    <html lang="en">
+<html lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -58,14 +52,13 @@
 
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
-                    <li><a class="nav-link scrollto " href="{{ path('home') }}">Home</a></li>
                     <li><a class="nav-link scrollto" href="{{ path('app_categorie_new') }}">Add Categorie</a></li>
                     <li><a class="nav-link scrollto" href="{{ path('app_categorie_index') }}">Categories</a></li>
                     <li><a class="nav-link scrollto" href="{{ path('blog') }}">Posts</a></li>
                     <li><a class="nav-link scrollto" href="{{ path('blog_create') }}">Creer un post</a></li>
                     <li><a class="nav-link scrollto" href="{{ path('app_sendtopfan_mail') }}">Send mail to our top fan <span class="emoji round">🏆</span></a></li>
                     <li><a class="nav-link scrollto" href="{{ path('app_prize') }}">play and win 🎮 </a></li>
-
+                </ul>
             </nav><!-- .navbar -->
 
 
@@ -98,12 +91,13 @@
         <td class="align-middle text-center">
             <span class="text-secondary text-xs font-weight-bold">{{ i.text }}</span>
         </td>
-
-
-
-
-
 {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
 
 
         <main id="main">
@@ -165,9 +159,9 @@
             </section><!-- End Cta Section -->
 
             <!-- ======= About Us Section ======= -->
-
+        </main>
+</section>
 </body>
 
 </html>
 
-{% endblock %}

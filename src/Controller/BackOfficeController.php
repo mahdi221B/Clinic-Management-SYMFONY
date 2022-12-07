@@ -27,9 +27,6 @@ class BackOfficeController extends AbstractController
         ));
     }
 
-
-
-
     #[Route('/categorie2', name: 'app_categorie_new2')]
     public function new(Request $request,ManagerRegistry $managerRegistry, CategorieRepository $categorieRepository)
     {
@@ -186,16 +183,5 @@ class BackOfficeController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("blog2");
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }

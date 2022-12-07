@@ -36,11 +36,6 @@ class BlogController extends AbstractController
         ]);
 
     }
-    #[Route('/', name: 'home')]
-        public function home()
-    {
-        return $this->render('blog/home.html.twig');
-    }
 
     #[Route('/blog/new', name: 'blog_create')]
     #[Route('/blog/{id}/edit', name: 'blog_edit')]

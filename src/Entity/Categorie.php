@@ -21,7 +21,7 @@ class Categorie
     #[ORM\Column(length: 255)]
     private ?string $text = null;
 
-    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Post::class)]
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Post::class,orphanRemoval: true)]
     private Collection $posts;
 
     public function __construct()
