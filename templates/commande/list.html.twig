@@ -178,17 +178,41 @@
                                                 <span class="text-secondary text-s font-weight-bold">{{ i.prixC }}</span>
                                             </td>
 
+                                            {% if i.status == 'validee' %}
+                                                <td class="align-middle text-center">
 
-                                            <td class="align-middle text-center">
+                                                    <p>commande validé</p>
 
-                                                <a class="btn btn-outline-success    btn-sm mb-0 me-3"  href="{{ path('confirm_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">valider commande</a>
+                                                </td>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <p>commande validé</p>
 
-                                            </td>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <a class="btn btn-outline-danger    btn-sm mb-0 me-3"  href="{{ path('refuse_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">refuser commande</a>
+                                                </td>
+                                            {% elseif i.status == 'a trate' %}
+                                                <td class="align-middle text-center">
 
-                                            </td>
+                                                    <a class="btn btn-outline-success    btn-sm mb-0 me-3"  href="{{ path('confirm_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">valider commande</a>
+
+                                                </td>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <a class="btn btn-outline-danger    btn-sm mb-0 me-3"  href="{{ path('refuse_commande',{'id' :i.id}) }}"onClick="this.disabled = true;">refuser commande</a>
+
+                                                </td>
+                                            {% else  %}
+                                                <td class="align-middle text-center">
+
+                                                    <p>refusee</p>
+
+                                                </td>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <p>refusee</p>
+
+                                                </td>
+                                            {% endif  %}
+
 
 
 
@@ -206,7 +230,7 @@
                                     <tr>
 
                                         <td class="align-middle text-center">
-                                           <span class="text-secondary text-s font-weight-bold">{{ c.Montant }}</span>
+                                            <span class="text-secondary text-s font-weight-bold">{{ c.Montant }}</span>
                                         </td>
 
 

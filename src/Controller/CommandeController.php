@@ -42,7 +42,7 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $commande->setArticles($Article);
         $em -> persist($commande);
         $em->flush();
-        return $this->redirectToRoute("list_commande");
+        return $this->redirectToRoute("list_article");
 
     }
     return $this->renderForm('commande/addc.html.twig',array(
@@ -57,6 +57,11 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $commande = $CommandeRepository->find($id);
         $budget =  $BudgetRepository->findOneBy(['id'=> '1' ]);
         $newFormat=date("d-m-Y",strtotime("now"));
+        if ($commande->getPrixC() > $budget->getMontant()){
+
+            return $this->renderForm('articles/error.html.twig');
+
+        }else{
         $commande->getArticles()->setQte($commande->getQteC()+$commande->getArticles()->getQte());
         $commande->setDateCloture($newFormat);
         $commande->setStatus("validee");
@@ -67,7 +72,7 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
         $em -> persist($commande);
         $em->flush();
         $CommandeRepository->sendsms();
-        return $this->redirectToRoute("list_commande");
+        return $this->redirectToRoute("list_commande");}
     }
 
 
@@ -138,5 +143,12 @@ public function addcommande($id, Request $request,ManagerRegistry $managerRegist
 
     //                return $this->redirectToRoute("list_article");
        }
+    #[Route('/mail', name: 'mail')]
+    public function mail( )
+    {
 
+
+        return $this->render("/mail.html.twig");
+
+    }
 }
