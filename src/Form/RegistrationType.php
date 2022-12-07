@@ -40,7 +40,7 @@ class RegistrationType extends AbstractType
                     'placeholder'=>'nom@exemple.com'
                 ]])
             ->add('Role',ChoiceType::class,array(
-                'choices'=>['Administrateur'=>'ROLE_ADMIN','Medecin'=>'ROLE_ADMIN','infirmier'=>'ROLE_ADMIN','agent de stock'=>'agent de stock','secretaire'=>'secretaire','technicien'=>'technicien']
+                'choices'=>['user_role'=>'ROLE_USER']
             ))
             ->add('MotPasse',PasswordType::class,
                 ['label'=>'MotPasse',

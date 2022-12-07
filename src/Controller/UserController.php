@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -168,6 +170,35 @@ class UserController extends AbstractController
     public function technicien()
     {
         return $this->render('User/technicien.html.twig');
+    }
+    /////////////////////////////////////////////////////////////////////////////////////
+    #[Route('/register', name: 'app_register')]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationType::class, $user);
+        $form->add('Insription', SubmitType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setMotPasse(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('MotPasse')->getData()
+                )
+            );
+
+            $entityManager->persist($user);
+            $entityManager->flush();
+            // do anything else you need here, like send an email
+
+            return $this->redirectToRoute('app_logout');
+        }
+
+        return $this->render('user/register.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
 
