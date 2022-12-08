@@ -48,11 +48,11 @@ class PatientController extends AbstractController
 
 
     #[Route('/delete/{id}', name: 'app_patient_delete')]
-    public function deletepatient ($id,PatientRepository $repository,ManagerRegistry $managerRegistry)
+    public function deletepatient ($id,PatientRepository $patientRepository,ManagerRegistry $managerRegistry)
     {
-        $patient = $repository->find($id);
-        $repository->remove($patient);
-        $em = $managerRegistry->getManager();
+        $patient = $patientRepository->find($id);
+        $em=$managerRegistry->getManager();
+        $em->remove($patient);
         $em->flush();
         return $this->redirectToRoute("patient_list");
     }
@@ -74,7 +74,7 @@ class PatientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $managerRegistry->getManager();
             $em->flush();
-            return $this->redirectToRoute('show_patient');
+            return $this->redirectToRoute('patient_list');
         }
         return $this->renderForm('patient/update.html.twig',array(
             'patient' => $patient,

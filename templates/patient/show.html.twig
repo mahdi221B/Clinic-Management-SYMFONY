@@ -150,8 +150,8 @@
                                    </tbody>
                                     {% for i in listpatient %}
                                         <tr>
-                                            <td><span class="text-secondary text-xs font-weight-bold">{{ i.nomprenomm }}</span></td>
-                                            <td><span class="text-secondary text-xs font-weight-bold">{{ i.dnp }}</span></td>
+                                            <td><span class="text-secondary text-xs font-weight-bold">{{ i.nomprenomp }}</span></td>
+                                            <td><span class="text-secondary text-xs font-weight-bold">{{ i.dnp|date }}</span></td>
                                             <td><span class="text-secondary text-xs font-weight-bold">{{ i.sexep }}</span></td>
                                             <td>  <span class="text-secondary text-xs font-weight-bold">{{ i.adrp }}</span></td>
                                             <td><span class="text-secondary text-xs font-weight-bold">{{ i.age }}</span></td>
@@ -162,8 +162,6 @@
                                     {% endfor %}
                                 </table>
                                 <div class="card-header pb-0">
-                                    <a href="{{ path('app_patient_new') }}">Add</a>
-
                                 </div>
                             </div>
                         </div>

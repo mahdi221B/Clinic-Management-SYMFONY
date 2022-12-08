@@ -50,7 +50,7 @@ class MedecinController extends AbstractController
     }
 
 
-    #[Route('/delete/{id}', name: 'app_medecin_delete')]
+    #[Route('medcin/delete/{id}', name: 'app_medecin_delete')]
     public function deletemed ($id,MedecinRepository $repository,ManagerRegistry $managerRegistry)
     {
         $medecin = $repository->find($id);
