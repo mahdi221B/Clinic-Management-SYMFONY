@@ -128,7 +128,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            {# <a href="{{ path('app_patient_new') }}">Add</a> #}
+
 
                             <h6>Liste des Patients</h6>
                         </div>
@@ -140,38 +140,20 @@
                                     {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
                                     <table>
                                         <tr>
-                                            <td>{{ form_label(form.nomprenomp,"Nom et Prénom")}}</td>
-                                            <td>{{ form_widget(form.nomprenomp)}}</td>
-                                            <td>{{ form_errors(form.nomprenomp)}}</td>
-                                            <td>{{ form_help(form.nomprenomp)}}</td>
+                                            <td>{{ form_label(form.idSalle,"La Salle")}}</td>
+                                            <td>{{ form_widget(form.idSalle)}}</td>
+                                            <td>{{ form_errors(form.idSalle)}}</td>
+                                            <td>{{ form_help(form.idSalle)}}</td>
                                         </tr>
                                         <tr>
-                                            <td>{{ form_label(form.dnp,"date de naissance")}}</td>
-                                            <td>{{ form_widget(form.dnp)}}</td>
-                                            <td>{{ form_errors(form.dnp)}}</td>
-                                            <td>{{ form_help(form.dnp)}}</td>
+                                            <td>{{ form_label(form.idEx,"Examen effectué")}}</td>
+                                            <td>{{ form_widget(form.idEx)}}</td>
+                                            <td>{{ form_errors(form.idEx)}}</td>
+                                            <td>{{ form_help(form.idEx)}}</td>
                                         </tr>
-                                        <tr>
-                                            <td>{{ form_label(form.sexep,"sexe")}}</td>
-                                            <td>{{ form_widget(form.sexep)}}</td>
-                                            <td>{{ form_errors(form.sexep)}}</td>
-                                            <td>{{ form_help(form.sexep)}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ form_label(form.adrp,"Addresse Mail")}}</td>
-                                            <td>{{ form_widget(form.adrp)}}</td>
-                                            <td>{{ form_errors(form.adrp)}}</td>
-                                            <td>{{ form_help(form.adrp)}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ form_label(form.age,"Age")}}</td>
-                                            <td>{{ form_widget(form.age)}}</td>
-                                            <td>{{ form_errors(form.age)}}</td>
-                                            <td>{{ form_help(form.age)}}</td>
-                                        </tr>
-                                        </table>
+                                       </table>
                                     {{ form_end(form) }}
-                                    <a href="{{ path('patient_list') }}">back to list</a>
+                                    <a href="{{ path('salle_examen_list') }}">back to list</a>
                                     </tbody>
                                 </table>
                             </div>

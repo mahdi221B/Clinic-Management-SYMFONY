@@ -127,53 +127,38 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
-                        <div class="card-header pb-0">
-                            {# <a href="{{ path('app_patient_new') }}">Add</a> #}
 
-                            <h6>Liste des Patients</h6>
-                        </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
                                 <table class="table align-items-center mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-m font-weight-bolder opacity-7">Detail Patient </th>
+                                        <th class="text-secondary opacity-7"></th>
+                                    </tr>
+                                    </thead>
                                     <tbody>
+                                     <tr>
+                                        <td><span class="text-secondary text-xs font-weight-bold"></span></td>
+                                         <td><span class="text-secondary text-xs font-weight-bold">Date de naissance</span></td>
+                                         </td>
 
-                                    {{ form_start(form,{'attr': {'novalidate': 'novalidate'}} ) }}
-                                    <table>
+                                    </tr>
+                                   </tbody>
+                                    {% for i in list_salle_examen %}
                                         <tr>
-                                            <td>{{ form_label(form.nomprenomp,"Nom et Prénom")}}</td>
-                                            <td>{{ form_widget(form.nomprenomp)}}</td>
-                                            <td>{{ form_errors(form.nomprenomp)}}</td>
-                                            <td>{{ form_help(form.nomprenomp)}}</td>
+                                            <td><span class="text-secondary text-xs font-weight-bold">{{ i.idSalle }}</span></td>
+                                            <td><span class="text-secondary text-xs font-weight-bold">{{ i.idEx }}</span></td>
+                                                 <td><a href="{{path('update_salle_examen',{'id':i.id}) }}">Update</a></td>
+                                            <td><a href="{{path('app_salle_examen_delete',{'id':i.id}) }}">Delete</a></td>
+
                                         </tr>
-                                        <tr>
-                                            <td>{{ form_label(form.dnp,"date de naissance")}}</td>
-                                            <td>{{ form_widget(form.dnp)}}</td>
-                                            <td>{{ form_errors(form.dnp)}}</td>
-                                            <td>{{ form_help(form.dnp)}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ form_label(form.sexep,"sexe")}}</td>
-                                            <td>{{ form_widget(form.sexep)}}</td>
-                                            <td>{{ form_errors(form.sexep)}}</td>
-                                            <td>{{ form_help(form.sexep)}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ form_label(form.adrp,"Addresse Mail")}}</td>
-                                            <td>{{ form_widget(form.adrp)}}</td>
-                                            <td>{{ form_errors(form.adrp)}}</td>
-                                            <td>{{ form_help(form.adrp)}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{{ form_label(form.age,"Age")}}</td>
-                                            <td>{{ form_widget(form.age)}}</td>
-                                            <td>{{ form_errors(form.age)}}</td>
-                                            <td>{{ form_help(form.age)}}</td>
-                                        </tr>
-                                        </table>
-                                    {{ form_end(form) }}
-                                    <a href="{{ path('patient_list') }}">back to list</a>
-                                    </tbody>
+                                    {% endfor %}
                                 </table>
+                                <div class="card-header pb-0">
+                                    <a href="{{ path('app_salleexamen_new') }}">Add</a>
+
+                                </div>
                             </div>
                         </div>
                     </div>
