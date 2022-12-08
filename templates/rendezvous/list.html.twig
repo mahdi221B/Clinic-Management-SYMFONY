@@ -1,0 +1,10 @@
+<h1>List rendez vous</h1>
+{% for c in listRendezvous %}
+    id: {{ c.id }}
+    dateRDV:{{ c.dateRDV }}
+    heureRDv:{{ c.heureRDv }}
+    nomPatient:{{ c.nomPatinet }}
+    cause:{{ c.cause }}
+
+    <br>
+{% endfor %}

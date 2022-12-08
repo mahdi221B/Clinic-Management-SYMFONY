@@ -1,0 +1,12 @@
+<h1>List consultations</h1>
+{% for c in listConsultation %}
+    id: {{ c.id }}
+    nomPat:{{ c.nomPat }}
+    nomMedecin:{{ c.nomMedecin }}
+    listMedic:{{ c.listMedic }}
+    listExam:{{ c.listExam }}
+    traitement:{{ c.traitement }}
+    dateCons:{{ c.dateCons }}
+
+    <br>
+{% endfor %}

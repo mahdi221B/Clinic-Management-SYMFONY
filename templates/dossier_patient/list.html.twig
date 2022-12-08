@@ -1,0 +1,11 @@
+<h1>List dossiers patients</h1>
+{% for c in listDossier %}
+    id: {{ c.id }}
+    nom:{{ c.nom }}
+    allergieMedic:{{ c.allergieMedic }}
+    medicaments:{{ c.medicaments }}
+    maladies:{{ c.maladies }}
+    detailsOperations:{{ c.detailsOperations }}
+
+    <br>
+{% endfor %}
