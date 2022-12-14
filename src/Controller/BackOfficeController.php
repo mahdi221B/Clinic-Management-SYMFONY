@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Categorie;
+use App\Entity\Commentaire;
 use App\Entity\Post;
 use App\Form\CategorieType;
+use App\Form\CommentaireType;
 use App\Form\PostType;
 use App\Repository\CategorieRepository;
+use App\Repository\CommentaireRepository;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -75,6 +78,65 @@ class BackOfficeController extends AbstractController
         ));
     }
 
+    #[Route('/blogs222', name: 'app_commentaire_index2')]
+    public function indexxx(CommentaireRepository $commentaireRepository)
+    {
+        $commentaires= $commentaireRepository->findAll();
+        return $this->render('back-office/listecommentaire.html.twig', array(
+            'commentaires' => $commentaires
+        ));
+    }
+
+    #[Route('/commentaire2', name: 'app_commentaire_new2')]
+    public function neww(Request $request,ManagerRegistry $managerRegistry, CommentaireRepository $commentaireRepository)
+    {
+        $commentaire = new Commentaire();
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $managerRegistry->getManager();
+            $commentaire->setDate(date("d-m-Y",strtotime("now")));
+            $em->persist($commentaire);
+            $em->flush();
+            return $this->redirectToRoute('app_commentaire_index2');
+        }
+        return $this->renderForm('back-office/addcommentaire.html.twig',array(
+            '$commentaire' => $commentaire,
+            'form' => $form
+        ));
+    }
+
+
+    #[Route('commentaire/{id}', name: 'app_commentaire2_delete')]
+    public function deletecommentaire ($id,CommentaireRepository $repository,ManagerRegistry $managerRegistry)
+    {
+        $commentaire = $repository->find($id);
+        $repository->remove($commentaire);
+        $em = $managerRegistry->getManager();
+        $em->flush();
+        return $this->redirectToRoute("app_commentaire_index2");
+    }
+
+
+    #[Route('/updateCommentaire2/{id}', name: 'update_commentaire2')]
+    public function updatecommentaire($id,Request $request,  CommentaireRepository $repository,ManagerRegistry $managerRegistry)
+    {
+        $commentaire = $repository->find($id);
+        $form = $this->createForm(CommentaireType::class, $commentaire);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $managerRegistry->getManager();
+            $em->flush();
+            return $this->redirectToRoute('app_commentaire_index2');
+        }
+        return $this->renderForm('back-office/updatecommentaire.html.twig',array(
+            'commentaire' => $commentaire,
+            'form' => $form
+        ));
+    }
+
+
+
 
 
 
@@ -102,8 +164,6 @@ class BackOfficeController extends AbstractController
         ]);
 
     }
-
-
 
 
 
